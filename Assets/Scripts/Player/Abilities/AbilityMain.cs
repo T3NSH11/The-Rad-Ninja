@@ -5,7 +5,11 @@ using UnityEngine;
 public class AbilityMain : MonoBehaviour
 {
     public float TeleportRange;
+<<<<<<< Updated upstream
     public float ShurikenSpeed;
+=======
+    public float TeleportSpeed;
+>>>>>>> Stashed changes
     public GameObject TeleportMarker;
     public GameObject Player;
     public GameObject ShurikenObj;
