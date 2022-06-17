@@ -22,8 +22,12 @@ public class Teleport : AbilityBase
 
         if (Input.GetMouseButtonUp(1))
         {
-            main.TeleportMarker.SetActive(true);
-            main.TeleportMarker.GetComponent<ParticleSystem>().Stop();
+            if (TP == false)
+            {
+                main.TeleportMarker.SetActive(true);
+                main.TeleportMarker.GetComponent<ParticleSystem>().Stop();
+            }
+
             main.CameraObj.GetComponent<Tempcamera>().distance = 7;
         }
 
