@@ -8,8 +8,19 @@ public class Teleport : AbilityBase
     bool TP;
     // sets ray origin to center of the screen.
     Vector3 rayOrigin = new Vector3(0.5f, 0.5f, 0f);
+
+    //True if animation finished
+    bool AnimFinished;
     public override void Activation(AbilityMain main)
     {
+        float NTime;
+        if (main.PlayerAnim.GetCurrentAnimatorStateInfo(0).IsName("TPDive"))
+        {
+            NTime = main.PlayerAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        }
+        else
+            NTime = 0;
+            
         Ray ray = Camera.main.ViewportPointToRay(rayOrigin);
         RaycastHit hit;
         RaycastHit hit2;
@@ -39,13 +50,13 @@ public class Teleport : AbilityBase
             // if ray hits ground teleport marker set to that point.
             if (Physics.Raycast(ray, out hit, main.TeleportRange, main.GroundLayer))
             {
-                main.TeleportMarker.transform.position = hit.point + new Vector3(0, 0, 0);
+                main.TeleportMarker.transform.position = hit.point;
             }
 
             // if ray doesn't hit anything then another ray is cast from the the point which is the distance of TeleportRange from the camera and in the origional ray trejectory.
             if (Physics.Raycast(ray.GetPoint(main.TeleportRange), new Vector3(0, -1, 0), out hit2, Mathf.Infinity) && !Physics.Raycast(ray, out hit, main.TeleportRange, main.Climbable))
             {
-                main.TeleportMarker.transform.position = hit2.point + new Vector3(0, 0, 0);
+                main.TeleportMarker.transform.position = hit2.point;
             }
 
             // if ray hits a climbable object another ray is cast from the point where the origional ray hits the object. Second ray is cast straight upwards to the top of the climbable object.
@@ -53,31 +64,42 @@ public class Teleport : AbilityBase
             {
                 if (Physics.Raycast(hit.point, new Vector3(0, 1, 0), out hit2, Mathf.Infinity))
                 {
-                    main.TeleportMarker.transform.position = hit2.point + new Vector3(0, 0, 0);
+                    main.TeleportMarker.transform.position = hit2.point;
                 }
             }
 
             // when player presses left mouse button TP is set to true and smoke trail particle effect is played while the player is set invisible and player collider is disabled.
             if (Input.GetMouseButtonDown(0))
             {
+                main.PlayerAnim.SetTrigger("TP");
                 TP = true;
-                main.Player.transform.Find("SmokeTrail").gameObject.GetComponent<ParticleSystem>().Play();
-                main.Player.GetComponent<MeshRenderer>().enabled = false;
-                main.Player.GetComponent<CapsuleCollider>().enabled = false;
             }
+
         }
 
-        // while player is teleporting and the player is more that 0.2 units away from destination player is moved towards the destination at TeleportSpeed.
-        if (TP == true && Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position + new Vector3(0, 1, 0)) > 0.2)
+        if (NTime > 0.75f)
+        {
+            main.Player.transform.Find("SmokeTrail").gameObject.GetComponent<ParticleSystem>().Play();
+            main.PlayerRenderer.enabled = false;
+            main.Player.GetComponent<CapsuleCollider>().enabled = false;
+        }
+
+        if (TP == true && Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position + new Vector3(0, 1, 0)) > 0.2 && main.PlayerAnim.GetCurrentAnimatorStateInfo(0).IsName("Empty"))
         {
             main.Player.transform.position = Vector3.MoveTowards(main.Player.transform.position, main.TeleportMarker.transform.position + new Vector3(0, 1, 0), main.TeleportSpeed * Time.deltaTime);
         }
+
+        // while player is teleporting and the player is more that 0.2 units away from destination player is moved towards the destination at TeleportSpeed.
+        //if (TP == true && Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position) > 0.2)
+        //{
+        //    main.Player.transform.position = Vector3.MoveTowards(main.Player.transform.position, main.TeleportMarker.transform.position, main.TeleportSpeed * Time.deltaTime);
+        //}
         // when player is closer that 0.2 units away from the destination TP is set to false, player collider and renderer is enabled, marker particle effect is stopped, and camera zoom is set to default.
-        else if (TP == true && Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position + new Vector3(0, 1, 0)) < 0.2)
+        if (Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position + new Vector3(0, 1, 0)) < 0.2)
         {
             TP = false;
             main.Player.transform.Find("SmokeTrail").gameObject.GetComponent<ParticleSystem>().Stop();
-            main.Player.GetComponent<MeshRenderer>().enabled = true;
+            main.PlayerRenderer.enabled = true;
             main.Player.GetComponent<CapsuleCollider>().enabled = true;
             main.TeleportMarker.SetActive(false);
             main.CameraObj.GetComponent<Tempcamera>().distance = 7;

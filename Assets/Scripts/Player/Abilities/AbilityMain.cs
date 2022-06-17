@@ -12,6 +12,8 @@ public class AbilityMain : MonoBehaviour
     public GameObject ShurikenObj;
     public GameObject CameraObj;
     public GameObject Crosshair;
+    public Renderer PlayerRenderer;
+    public Animator PlayerAnim;
     public LayerMask GroundLayer;
     public LayerMask Climbable;
     AbilityBase Ability;
