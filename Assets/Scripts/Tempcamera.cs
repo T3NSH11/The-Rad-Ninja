@@ -16,6 +16,7 @@ public class Tempcamera : MonoBehaviour
     private float currentY = 0.0f;
     public float sensivity = 4.0f;
 
+    public Vector3 LookatOfset;
 
     void Start()
     {
@@ -32,7 +33,23 @@ public class Tempcamera : MonoBehaviour
 
         Vector3 Direction = new Vector3(0, 0, -distance);
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        Player.rotation = Quaternion.Euler(0, currentX, 0);
+
+        if (Input.GetMouseButton(1))
+        {
+            Player.rotation = Quaternion.Euler(0, currentX, 0);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            lookAt.localPosition = LookatOfset;
+            //distance = 2;
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            lookAt.localPosition = new Vector3 (0, 2, 0);
+            distance = 4;
+        }
+
         transform.position = lookAt.position + rotation * Direction;
 
         transform.LookAt(lookAt.position);
