@@ -13,14 +13,14 @@ public class TestingPathFinding : MonoBehaviour
 
     void Start()
     {
-        Path = Pathfinder.FindPath(Origin.transform.position, Target.transform.position, 5);
+        Path = Pathfinder.FindPath(Origin.transform.position, Target.transform.position);
     }
 
     private void Update()
     {
-        //if (TargetPos != Target.transform.position)
+        if (TargetPos != Target.transform.position)
         {
-            Path = Pathfinder.FindPath(Origin.transform.position, Target.transform.position, 5);
+            Path = Pathfinder.FindPath(Origin.transform.position, Target.transform.position);
         }
 
         TargetPos = Target.transform.position;

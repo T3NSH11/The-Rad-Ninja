@@ -8,7 +8,7 @@ using MoreLinq;
 public class Pathfinder
 {
     bool NodesAdded = false;
-    public Stack<Vector3> FindPath(Vector3 Origin, Vector3 Target, int StepsPerFrame)
+    public Stack<Vector3> FindPath(Vector3 Origin, Vector3 Target)
     {
         Stack<Vector3> Path = new Stack<Vector3>();
         _Grid Grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<_Grid>();
