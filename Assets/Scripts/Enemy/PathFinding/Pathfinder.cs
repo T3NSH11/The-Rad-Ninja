@@ -8,6 +8,7 @@ using MoreLinq;
 public class Pathfinder
 {
     bool NodesAdded = false;
+    public bool PathFollowed;
     public Stack<Vector3> FindPath(Vector3 Origin, Vector3 Target)
     {
         Stack<Vector3> Path = new Stack<Vector3>();
@@ -238,8 +239,11 @@ public class Pathfinder
 
         if (Path.Count == 0)
         {
+            PathFollowed = true;
             return;
         }
+        else
+            PathFollowed = false;
 
         if (Path.Count != 0)
         {

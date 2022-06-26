@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GoToLocation : EnemyState
 {
-    Pathfinder Pathfinder = new Pathfinder();
-    public float Speed;
     public Stack<Vector3> Path;
 
     public override void StartState(EnemyManager manager)
@@ -15,8 +13,8 @@ public class GoToLocation : EnemyState
 
     public override void UpdateState(EnemyManager manager)
     {
-        Path = Pathfinder.FindPath(manager.transform.position, manager.TargetLoc);
+        Path = manager.Pathfinder.FindPath(manager.transform.position, manager.TargetLoc);
 
-        Pathfinder.FollowPath(Path, manager.gameObject, Speed);
+        manager.Pathfinder.FollowPath(Path, manager.gameObject, manager.RunSpeed);
     }
 }
