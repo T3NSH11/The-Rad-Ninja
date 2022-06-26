@@ -20,7 +20,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector3 offset = new Vector3(0, 0, 0);
     [SerializeField] float distanceFromPlayer = 4;
     [SerializeField] float distanceAdjustment;
-
+    [SerializeField] float avoidanceSpeed;
+    [SerializeField] bool colliding;
 
     float horizontalInput;
     float verticalInput;
@@ -67,28 +68,49 @@ public class CameraController : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, playerPosition, avoidanceSpeed * Time.deltaTime);
+        colliding = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        colliding = false;
+    }
+
     // move and rotate camera according to input.
-    void LateUpdate(){
+    void FixedUpdate(){
 
         /// movement
         playerPosition = player.position + offset;
-        
-        if (Physics.Linecast(playerPosition, transform.position * collisionSpacing, out hit, collisionLayer))
+
+        if (!colliding && Vector3.Distance(playerPosition, transform.position) < 0.2)
+        {
+            transform.position = Vector3.MoveTowards(playerPosition, transform.position, avoidanceSpeed * Time.deltaTime);
+        }
+
+        /*if (Physics.Linecast(playerPosition, transform.position * collisionSpacing, out hit, collisionLayer))
         {
 
             desiredPosition = Quaternion.Euler(verticalInput, horizontalInput, 0)
                                 * (Vector3.back * hit.distance * distanceAdjustment);//new Vector3(0, 0, -Vector3.Distance(transform.position, hit.point));
             Debug.DrawLine(playerPosition, transform.position, Color.red);
+            
         }
         else
         {
-            desiredPosition = Quaternion.Euler(verticalInput, horizontalInput, 0) * (Vector3.back * distanceFromPlayer);
             Debug.DrawLine(playerPosition, transform.position, Color.green);
-        }
+        }*/
 
-        desiredPosition += playerPosition;
-        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref followSmoothing, movementSpeed);
+        desiredPosition = Quaternion.Euler(verticalInput, horizontalInput, 0) * (Vector3.back * distanceFromPlayer);
+        //desiredPosition += playerPosition;
+        transform.position = desiredPosition; //Vector3.SmoothDamp(transform.position, desiredPosition, ref followSmoothing, movementSpeed);
         
+
+        //if space behind camera is empty
+        // cameradistance = default;
+        //else shrink camera distance
 
 
         /*
