@@ -9,9 +9,9 @@ public class CheckpointHandler : MonoBehaviour
     public static Vector3 currentSavedSpawn = Vector3.zero;
     static Vector3 defaultSpawnpoint; // meant to be set to the player's position at the start of the level
 
-    static bool autosaveEnabled;
+    static bool autosaveEnabled = false;
 
-    public static CheckpointHandler handler;
+    static CheckpointHandler handler;
 
     void Awake(){
 
@@ -26,23 +26,34 @@ public class CheckpointHandler : MonoBehaviour
         player = GameObject.Find("Player");
         defaultSpawnpoint = player.transform.position;
 
-        Respawn();  // respawn should be called when the scene is loaded
+        //Respawn();  // respawn should be called when the scene is loaded
+    }
+
+    void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Respawn();
+        }
     }
 
     // should be called when entering a playable scene.
     public static void Respawn(){
 
-        if (currentSavedSpawn == Vector3.zero)
-            currentSavedSpawn = defaultSpawnpoint;
+        //if (currentSavedSpawn == Vector3.zero)
+            //currentSavedSpawn = defaultSpawnpoint;
 
         player.transform.position = currentSavedSpawn;
-
+            Debug.Log("respawn called");
+        
     }
 
     public static void SetRespawn(Vector3 checkpointPos){
 
         currentSavedSpawn = checkpointPos;
-        
+        Debug.Log("spawn set");
+
         if(autosaveEnabled)
             SaveLoad.Save(); // save (including current checkpoint) when a checkpoint is reached.
     }
