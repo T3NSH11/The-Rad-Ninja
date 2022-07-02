@@ -34,7 +34,7 @@ public class ThirdPersonController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        mSpeedY += mGravity * Time.deltaTime; 
+        mSpeedY += mGravity * Time.deltaTime;
         mSprinting = Input.GetKey(KeyCode.LeftShift);
 
         Vector3 movement = new Vector3(x, 0, z).normalized;
@@ -43,15 +43,24 @@ public class ThirdPersonController : MonoBehaviour
         Vector3 verticalMovement = Vector3.up * mSpeedY;
 
         MyController.Move((verticalMovement + (rotatedMovement * (mSprinting ? SprintSpeed : Speed))) * Time.deltaTime);
-        
-        if(rotatedMovement.magnitude > 0)
+
+        if (rotatedMovement.magnitude > 0)
         {
-       mDesiredRotation = Mathf.Atan2(rotatedMovement.x, rotatedMovement.z) * Mathf.Rad2Deg;
-            mDesiredAnimationSpeed = mSprinting ? 1 : .5f ;
+            mDesiredRotation = Mathf.Atan2(rotatedMovement.x, rotatedMovement.z) * Mathf.Rad2Deg;
+            mDesiredAnimationSpeed = mSprinting ? 1f : .5f;
         }
         else
         {
             mDesiredAnimationSpeed = 0;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            MyAnimator.SetBool("Crouching", true);
+        }
+        else
+        {
+            MyAnimator.SetBool("Crouching", false);
         }
 
         MyAnimator.SetFloat("Speed", Mathf.Lerp(MyAnimator.GetFloat("Speed"), mDesiredAnimationSpeed, AnimationBlendSpeed * Time.deltaTime));
