@@ -16,11 +16,11 @@ public class PlayerInteraction : MonoBehaviour
 
         interactionCheckRay = new Ray(transform.position, transform.forward * checkDistance);
 
-        if (Physics.Raycast(interactionCheckRay, out hit, checkDistance))
+        if (Physics.Raycast(interactionCheckRay, out hit, checkDistance) && !Interactable.interactionActive)
         {
             if (hit.collider.CompareTag("Interactable"))
             {
-                interactableToCheck = hit.collider.gameObject.GetComponent<Interactable>(); //
+                interactableToCheck = hit.collider.gameObject.GetComponent<Interactable>(); // 
 
                 if (currentInteractable == interactableToCheck)
                     currentInteractable.InRange();
