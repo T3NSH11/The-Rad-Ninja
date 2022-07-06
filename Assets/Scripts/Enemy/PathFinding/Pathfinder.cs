@@ -228,19 +228,19 @@ public class Pathfinder
         }
     }
 
-    public void FollowPath(Stack<Vector3> Path, GameObject Object, float Speed)
+    public bool FollowPath(Stack<Vector3> Path, GameObject Object, float Speed)
     {
         Vector3 TargetPos = Vector3.zero;
 
         if (Path == null)
         {
-            return;
+            return true;
         }
 
         if (Path.Count == 0)
         {
             PathFollowed = true;
-            return;
+            return true;
         }
         else
             PathFollowed = false;
@@ -257,6 +257,7 @@ public class Pathfinder
 
         Object.GetComponent<Rigidbody>().velocity += (TargetPos - Object.transform.position).normalized * (Speed * Time.deltaTime);
         Object.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(Object.GetComponent<Rigidbody>().velocity, Speed);
+        return false;
     }
 
     public void ResetNodes(_Grid Grid)

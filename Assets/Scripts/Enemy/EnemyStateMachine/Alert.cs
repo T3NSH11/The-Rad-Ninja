@@ -6,11 +6,12 @@ public class Alert : EnemyState
 {
     public override void StartState(EnemyManager manager)
     {
-        throw new System.NotImplementedException();
+        //Play look around animation for enemy
+        //Set detection timer to smaller amount
     }
 
     public override void UpdateState(EnemyManager manager)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

@@ -4,12 +4,29 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    #region Variables
+    #region Enemy general
     EnemyState CurrentState;
-
-    #region Go to location
-    [Header("PathFinding Settings")]
+    GameObject EnemyHead;
     public Pathfinder Pathfinder = new Pathfinder();
-    public Vector3 TargetLoc;
+    public EnemyFOV FOV;
+    public float DetectionLevel;
+    public float WanderDetectionRequired;
+    public float AlertDetectionSpeedRequired;
+    #region States
+    public EnemyState Wander;
+    public EnemyState SearchForPlayer;
+    public EnemyState Alert;
+    public EnemyState ChasePlayer;
+    public EnemyState Idle;
+    public EnemyState Attack;
+
+    #endregion
+    #endregion
+
+    #region Search for player
+    [Header("Search Settings")]
+    public Vector3 LastPlayerLoc;
     public float RunSpeed;
     #endregion
 
@@ -20,13 +37,19 @@ public class EnemyManager : MonoBehaviour
     public Stack<Vector3> _WanderPath;
     public float WalkSpeed;
     #endregion
+    #endregion
 
     void Start()
     {
-        for (int i = 0; i < WanderPath.Length; i++)
-        {
-            _WanderPath.Push(WanderPath[i].transform.position);
-        }
+        #region State assignments
+        Wander = new Wander();
+        SearchForPlayer = new SearchForPlayer();
+        Alert = new Alert();
+        ChasePlayer = new ChasePlayer();
+        Idle = new Idle();
+        Attack = new Attack();
+        CurrentState = new Wander();
+        #endregion
 
         CurrentState.StartState(this);
     }
@@ -39,5 +62,6 @@ public class EnemyManager : MonoBehaviour
     public void SwitchState(EnemyState state)
     {
         CurrentState = state;
+        CurrentState.StartState(this);
     }
 }
