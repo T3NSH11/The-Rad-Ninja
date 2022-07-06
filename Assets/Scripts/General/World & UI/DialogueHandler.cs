@@ -12,9 +12,10 @@ public class DialogueHandler : MonoBehaviour
     static TextMeshProUGUI displayText; // make sure these are parented to the obj with the script
 
     static ThirdPersonController playerController;
+    static GameObject playerHUD;
 
-    static List<string> currentDialogueText = new List<string>();
-    static List<AudioClip> currentDialogueAudio = new List<AudioClip>();
+    static List<string> currentDialogueText = new List<string>(20);
+    static List<AudioClip> currentDialogueAudio = new List<AudioClip>(20);
     static AudioSource audioSource;
 
     static int index = -1;
@@ -37,7 +38,9 @@ public class DialogueHandler : MonoBehaviour
         textbox = gameObject.GetComponentInChildren<Image>();
         displayText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
+
         playerController = GameObject.Find("Player").GetComponent<ThirdPersonController>();
+        playerHUD = GameObject.Find("HUD");
 
 
         displayText.text = "";
@@ -61,9 +64,11 @@ public class DialogueHandler : MonoBehaviour
         dialogueActive = true;
         // freeze the game, disable player movement
         playerController.enabled = false;
+        playerHUD.SetActive(false);
 
         // make textbox appear
         textbox.gameObject.SetActive(true);
+
 
         currentDialogueText.Clear();
         currentDialogueText.AddRange(dialogue); // empty list from previous dialogue, add dialogue to be displayed
@@ -85,6 +90,7 @@ public class DialogueHandler : MonoBehaviour
         {
             dialogueActive = false;
             playerController.enabled = true;
+            playerHUD.SetActive(true);
 
             displayText.text = "";
             textbox.gameObject.SetActive(false);
