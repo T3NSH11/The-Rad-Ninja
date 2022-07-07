@@ -18,7 +18,6 @@ public class Pathfinder
         List<Node> NodesCalculated = new List<Node>();
 
         ResetNodes(Grid);
-        CheckForObstacles(Grid);
 
         Node OriginNode = GetNodeFromWorldPosition(Origin, Grid);
         Node TargetNode = GetNodeFromWorldPosition(Target, Grid);
@@ -49,18 +48,25 @@ public class Pathfinder
 
             foreach (Node i in FindNeigbours(Grid, CurrentNode))
             {
-                if (i.Gcost > GetGCost(i, OriginNode))
+                if (i.IsObstacle == true)
                 {
-                    i.Gcost = GetGCost(i, OriginNode);
-                    i.PreviousNode = CurrentNode;
+                    i.Fcost = Mathf.Infinity;
                 }
-
-                i.Hcost = GetHCost(Grid, i, TargetNode);
-                i.Fcost = GetFCost(Grid, i, TargetNode, OriginNode);
-
-                if (!NodesCalculated.Contains(i) && !NodesVisited.Contains(i))
+                else
                 {
-                    NodesCalculated.Add(i);
+                    if (i.Gcost > GetGCost(i, OriginNode))
+                    {
+                        i.Gcost = GetGCost(i, OriginNode);
+                        i.PreviousNode = CurrentNode;
+                    }
+
+                    i.Hcost = GetHCost(Grid, i, TargetNode);
+                    i.Fcost = GetFCost(Grid, i, TargetNode, OriginNode);
+
+                    if (!NodesCalculated.Contains(i) && !NodesVisited.Contains(i))
+                    {
+                        NodesCalculated.Add(i);
+                    }
                 }
             }
 
@@ -74,6 +80,7 @@ public class Pathfinder
         while (CurrentNode.GridPosition != OriginNode.GridPosition)
         {
             Path.Push(CurrentNode.WorldPosition);
+            Debug.DrawLine(CurrentNode.WorldPosition, CurrentNode.PreviousNode.WorldPosition);
             CurrentNode = CurrentNode.PreviousNode;
         }
 
@@ -119,14 +126,13 @@ public class Pathfinder
     {
         List<Node> neighbours = new List<Node>();
 
-        neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x, node.GridPosition.y + 1)));
-        neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x + 1, node.GridPosition.y)));
-        neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x + 1, node.GridPosition.y + 1)));
-        neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x, node.GridPosition.y - 1)));
-        neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x - 1, node.GridPosition.y)));
-        neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x - 1, node.GridPosition.y - 1)));
-        neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x + 1, node.GridPosition.y - 1)));
-        neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x - 1, node.GridPosition.y + 1)));
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = 0; y <= 1; y++)
+            {
+                neighbours.Add(GetNodeFromGridPosition(Grid, new Vector2(node.GridPosition.x + x, node.GridPosition.y + y)));
+            }
+        }
 
         neighbours.RemoveAll(x => x == null);
         neighbours.Remove(node.PreviousNode);
@@ -216,17 +222,15 @@ public class Pathfinder
             return null;
     }
 
-    public void CheckForObstacles(_Grid Grid)
-    {
-        foreach (Node i in Grid.Nodes)
-        {
-            RaycastHit hit;
-            if(Physics.Raycast(i.WorldPosition, Vector3.up, out hit, Mathf.Infinity, LayerMask.NameToLayer("Obstacle")))
-            {
-                i.IsObstacle = true;
-            }
-        }
-    }
+    //public void CheckForObstacles(Node Origin, Node Node)
+    //{
+    //    RaycastHit hit;
+    //
+    //    if (Physics.Raycast(Origin.WorldPosition, (Node.WorldPosition - Origin.WorldPosition), out hit, Vector3.Distance(Origin.WorldPosition, Node.WorldPosition), LayerMask.NameToLayer("Obstacle")))
+    //    {
+    //        Node.IsObstacle = true;
+    //    }
+    //}
 
     public bool FollowPath(Stack<Vector3> Path, GameObject Object, float Speed)
     {
@@ -250,13 +254,15 @@ public class Pathfinder
             TargetPos = Path.Peek();
         }
 
-        if (Vector3.Distance(Object.transform.position, TargetPos) < 0.2 && Path.Count != 0)
+        if (Vector3.Distance(Object.transform.position, TargetPos) < 0.5 && Path.Count != 0)
         {
             TargetPos = Path.Pop();
         }
 
-        Object.GetComponent<Rigidbody>().velocity += (TargetPos - Object.transform.position).normalized * (Speed * Time.deltaTime);
-        Object.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(Object.GetComponent<Rigidbody>().velocity, Speed);
+        Object.transform.LookAt(TargetPos);
+        Object.transform.position = Vector3.MoveTowards(Object.transform.position, TargetPos, Speed * Time.deltaTime);
+        //Object.GetComponent<Rigidbody>().velocity += (TargetPos - Object.transform.position).normalized * (Speed * Time.deltaTime);
+        //Object.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(Object.GetComponent<Rigidbody>().velocity, Speed);
         return false;
     }
 

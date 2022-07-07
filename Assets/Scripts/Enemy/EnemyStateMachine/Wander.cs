@@ -4,36 +4,39 @@ using UnityEngine;
 
 public class Wander : EnemyState
 {
-    bool PathReversed;
-    Stack<Vector3> Path;
-    Stack<Vector3> ReversePath;
     public override void StartState(EnemyManager manager)
     {
-        Path = manager._WanderPath;
-
-        foreach (Vector3 position in Path)
-        {
-            ReversePath.Push(Path.Pop());
-        }
+        
     }
 
     public override void UpdateState(EnemyManager manager)
     {
-        if(manager.Pathfinder.PathFollowed == true)
+        float node_Distance = Vector3.Distance(manager.current_SetPath.pathNodes[manager.currentPath_NodeID].position, manager.transform.position);
+        manager.transform.position = Vector3.MoveTowards(manager.transform.position, manager.current_SetPath.pathNodes[manager.currentPath_NodeID].position, Time.deltaTime * manager.WalkSpeed);
+
+        var object_Rotation = Quaternion.LookRotation(manager.current_SetPath.pathNodes[manager.currentPath_NodeID].position - manager.transform.position);
+        manager.transform.rotation = Quaternion.Slerp(manager.transform.rotation, object_Rotation, Time.deltaTime * manager.rotationSpeed);
+
+        manager.gameObject.transform.rotation = manager.transform.rotation;
+
+        if (node_Distance <= manager.waypointDist)
         {
-            if (PathReversed == false)
-            {
-                Path = ReversePath;
-
-                manager.SwitchState(new Idle());
-            }
-
-            if (PathReversed == true)
-            {
-                Path = manager._WanderPath;
-            }
+            manager.currentPath_NodeID++;
         }
 
-        manager.Pathfinder.FollowPath(Path, manager.transform.gameObject, manager.WalkSpeed);
+        if (manager.currentPath_NodeID >= manager.current_SetPath.pathNodes.Count)
+        {
+            manager.currentPath_NodeID = 0;
+        }
+
+        if (manager.FOV.PlayerDetected)
+        {
+            manager.SwitchState(manager.Detect);
+        }
+        
+        if (Vector3.Distance(manager.gameObject.transform.position, manager.Player.transform.position) < manager.AttackRange)
+        {
+            
+        }
     }
 }

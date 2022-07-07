@@ -13,14 +13,6 @@ public class Teleport : AbilityBase
     bool AnimFinished;
     public override void Activation(AbilityMain main)
     {
-        float NTime;
-        if (main.PlayerAnim.GetCurrentAnimatorStateInfo(0).IsName("TPDive"))
-        {
-            NTime = main.PlayerAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        }
-        else
-            NTime = 0;
-
         Ray ray = Camera.main.ViewportPointToRay(rayOrigin);
         RaycastHit hit;
         RaycastHit hit2;
@@ -41,7 +33,7 @@ public class Teleport : AbilityBase
                 main.TeleportMarker.GetComponent<ParticleSystem>().Stop();
             }
 
-            main.CameraObj.GetComponent<Tempcamera>().distance = 7;
+            //main.CameraObj.GetComponent<CameraController>().distance = 7;
         }
 
         if (Input.GetMouseButton(1) && TP == false)
@@ -67,25 +59,30 @@ public class Teleport : AbilityBase
                 }
             }
 
+            if (Physics.Raycast(ray, out hit, main.TeleportRange, main.ObstacleLayer))
+            {
+                if (Physics.Raycast(hit.point, new Vector3(0, -1, 0), out hit2, Mathf.Infinity))
+                {
+                    main.TeleportMarker.transform.position = hit2.point;
+                }
+            }
+
             // when player presses left mouse button TP is set to true and smoke trail particle effect is played while the player is set invisible and player collider is disabled.
             if (Input.GetMouseButtonDown(0))
             {
-                main.PlayerAnim.SetTrigger("TP");
                 TP = true;
+                main.SmokeTrail.GetComponent<ParticleSystem>().Play();
+                main.PlayerRenderer.enabled = false;
+                main.Player.GetComponent<CharacterController>().enabled = false;
             }
 
         }
 
-        if (NTime > 0.7f)
-        {
-            main.Player.transform.Find("SmokeTrail").gameObject.GetComponent<ParticleSystem>().Play();
-            main.PlayerRenderer.enabled = false;
-            main.Player.GetComponent<CapsuleCollider>().enabled = false;
-        }
 
-        if (TP == true && Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position) > 0.2 && (main.PlayerAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || NTime > 0.7f))
+        if (TP == true && Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position) > 0.2)
         {
             main.Player.transform.position = Vector3.MoveTowards(main.Player.transform.position, main.TeleportMarker.transform.position, main.TeleportSpeed * Time.deltaTime);
+            main.gameObject.transform.LookAt(main.TeleportMarker.transform.position);
         }
 
         // while player is teleporting and the player is more that 0.2 units away from destination player is moved towards the destination at TeleportSpeed.
@@ -97,9 +94,9 @@ public class Teleport : AbilityBase
         if (Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position) < 0.2)
         {
             TP = false;
-            main.Player.transform.Find("SmokeTrail").gameObject.GetComponent<ParticleSystem>().Stop();
+            main.SmokeTrail.GetComponent<ParticleSystem>().Stop();
             main.PlayerRenderer.enabled = true;
-            main.Player.GetComponent<CapsuleCollider>().enabled = true;
+            main.Player.GetComponent<CharacterController>().enabled = true;
             main.TeleportMarker.SetActive(false);
         }
     }

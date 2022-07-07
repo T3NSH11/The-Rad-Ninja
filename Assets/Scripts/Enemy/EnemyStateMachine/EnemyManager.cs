@@ -7,7 +7,9 @@ public class EnemyManager : MonoBehaviour
     #region Variables
     #region Enemy general
     EnemyState CurrentState;
-    GameObject EnemyHead;
+    [Header("General Settings")]
+    public GameObject EnemyHead;
+    public GameObject Player;
     public Pathfinder Pathfinder = new Pathfinder();
     public EnemyFOV FOV;
     public float DetectionLevel;
@@ -20,6 +22,8 @@ public class EnemyManager : MonoBehaviour
     public EnemyState ChasePlayer;
     public EnemyState Idle;
     public EnemyState Attack;
+    public EnemyState Detect;
+    public EnemyState GoToPath;
 
     #endregion
     #endregion
@@ -36,6 +40,18 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] WanderPath;
     public Stack<Vector3> _WanderPath;
     public float WalkSpeed;
+    public float waypointDist;
+    public float rotationSpeed;
+    public GameObject[] patrolPaths;
+    public GameObject[] PathNodes;
+    public int currentPath_NodeID = 0;
+    public WaypointSystem current_SetPath;
+    #endregion
+
+    #region Attack
+    [Header("Attack Settings")]
+    public float AttackRange;
+    public float AttackDamage;
     #endregion
     #endregion
 
@@ -48,7 +64,9 @@ public class EnemyManager : MonoBehaviour
         ChasePlayer = new ChasePlayer();
         Idle = new Idle();
         Attack = new Attack();
-        CurrentState = new Wander();
+        Detect = new Detect();
+        GoToPath = new GoToPath();
+        CurrentState = Wander;
         #endregion
 
         CurrentState.StartState(this);
@@ -57,6 +75,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         CurrentState.UpdateState(this);
+        Debug.Log(CurrentState);
     }
 
     public void SwitchState(EnemyState state)

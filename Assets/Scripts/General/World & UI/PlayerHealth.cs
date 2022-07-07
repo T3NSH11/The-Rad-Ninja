@@ -21,15 +21,15 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         lowHealth = maxHealth / 3;
 
-        healthbarSlider.maxValue = maxHealth;
-        healthbarSlider.value = currentHealth;
+        //healthbarSlider.maxValue = maxHealth;
+        //healthbarSlider.value = currentHealth;
     }
 
 
     void Update(){
 
         //healthbarLerpValue = Mathf.MoveTowards(healthbarSlider.value, currentHealth, slideSpeed);
-        healthbarSlider.value = currentHealth;//Mathf.Lerp(healthbarSlider.value, currentHealth, slideSpeed);
+        //healthbarSlider.value = currentHealth;//Mathf.Lerp(healthbarSlider.value, currentHealth, slideSpeed);
 
 
         if (currentHealth <= lowHealth)
@@ -59,9 +59,14 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(5);
         }
+
+        if(currentHealth <= 0)
+        {
+            Debug.Log("Dead");
+        }
     }
 
-    static void TakeDamage(float damageToDeal)
+    public void TakeDamage(float damageToDeal)
     {
         currentHealth -= damageToDeal;
     }
