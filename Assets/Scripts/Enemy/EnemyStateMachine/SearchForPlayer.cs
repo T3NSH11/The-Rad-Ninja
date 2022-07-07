@@ -14,9 +14,15 @@ public class SearchForPlayer : EnemyState
     public override void UpdateState(EnemyManager manager)
     {
         bool PathFollowed = manager.Pathfinder.FollowPath(Path, manager.gameObject, manager.RunSpeed);
+
         if(PathFollowed == true)
         {
-            manager.SwitchState(manager.Alert);
+            manager.SwitchState(manager.GoToPath);
+        }
+
+        if(manager.FOV.PlayerDetected)
+        {
+            manager.SwitchState(manager.ChasePlayer);
         }
     }
 }

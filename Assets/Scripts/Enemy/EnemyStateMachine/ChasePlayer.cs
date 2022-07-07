@@ -13,11 +13,18 @@ public class ChasePlayer : EnemyState
     {
         if(manager.FOV.PlayerDetected == true)
         {
-            //enemy moves towards player
+            manager.gameObject.transform.position += (manager.Player.transform.position - manager.transform.position).normalized * manager.RunSpeed * Time.deltaTime;
+            manager.transform.LookAt(manager.Player.transform.position);
         }
         else
         {
+            manager.LastPlayerLoc = manager.Player.transform.position;
             manager.SwitchState(manager.SearchForPlayer);
+        }
+
+        if (Vector3.Distance(manager.transform.position, manager.Player.transform.position) < manager.AttackRange)
+        {
+            manager.SwitchState(manager.Attack);
         }
     }
 }

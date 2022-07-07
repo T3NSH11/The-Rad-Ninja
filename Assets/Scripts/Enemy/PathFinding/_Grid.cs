@@ -76,6 +76,10 @@ public class _Grid : MonoBehaviour
                 Nodes[i].WorldPosition = new Vector3(transform.position.x + (CellSize / 2) + (CellSize * ColCount), transform.position.y, transform.position.z + (CellSize / 2) + (CellSize * RowCount));
                 NodeWorldPositionsx[i] = Nodes[i].WorldPosition.x;
                 NodeWorldPositionsz[i] = Nodes[i].WorldPosition.z;
+
+                GameObject collider = Instantiate(SphereCollider, Nodes[i].WorldPosition, Quaternion.identity, SphereColliderContainer.transform);
+                collider.GetComponent<SphereCollider>().radius = CellSize/2;
+                collider.GetComponent<Collisiondetection>().node = Nodes[i];
                 ColCount++;
                 i++;
             }
