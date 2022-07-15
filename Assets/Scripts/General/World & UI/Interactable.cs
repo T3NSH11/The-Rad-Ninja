@@ -6,12 +6,12 @@ using UnityEngine.UI;
 //TODO: need to find a way to make sure the player can't interact with multiple things at once
 public abstract class Interactable : MonoBehaviour
 {
+    public static bool interactionActive { get; protected set; }
     bool inRange;
     Image interactionIcon;
 
 
-    public abstract void OnInteraction();
-
+    
 
     void Start(){
         interactionIcon = GameObject.Find("Interaction Icon").GetComponent<Image>();
@@ -19,10 +19,21 @@ public abstract class Interactable : MonoBehaviour
 
     void Update(){
 
-        if (inRange && Input.GetKeyDown(KeyCode.K))
+        if (inRange && !interactionActive && Input.GetKeyDown(KeyCode.K))
         {
-            OnInteraction();
+            InteractionEvent();
         }
+    }
+
+
+    public abstract void OnInteraction();
+
+    void InteractionEvent(){
+
+        interactionActive = true;
+        OnInteraction();
+        interactionActive = false;
+        
     }
 
 
@@ -30,6 +41,7 @@ public abstract class Interactable : MonoBehaviour
         inRange = true;
         interactionIcon.enabled = true;
         // use outline shader here.
+        
     }
 
     public void OutOfRange(){
@@ -38,6 +50,7 @@ public abstract class Interactable : MonoBehaviour
     }
 
 
+    /*
     private void OnTriggerEnter(Collider other){
 
         if (other.CompareTag("Player"))
@@ -58,5 +71,5 @@ public abstract class Interactable : MonoBehaviour
             inRange = false;
             interactionIcon.enabled = false;
         }
-    }
+    }*/
 }

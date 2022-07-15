@@ -6,11 +6,11 @@ public class Idle : EnemyState
 {
     public override void StartState(EnemyManager manager)
     {
-        throw new System.NotImplementedException();
+        // Play enemy Idle animation
     }
 
     public override void UpdateState(EnemyManager manager)
     {
-        throw new System.NotImplementedException();
+
     }
 }
