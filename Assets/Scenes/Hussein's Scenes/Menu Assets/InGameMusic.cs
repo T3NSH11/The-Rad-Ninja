@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicControl : MonoBehaviour
+public class InGameMusic : MonoBehaviour
 {
-    public static MusicControl instance; // Creates a static varible for a MusicControlScript instance
+    public static InGameMusic instance; // Creates a static varible for a MusicControlScript instance
 
     private void Awake() // Runs before void Start()
     {
-        //DontDestroyOnLoad(this.gameObject); // Don't destroy this gameObject when loading different scenes
+        DontDestroyOnLoad(this.gameObject); // Don't destroy this gameObject when loading different scenes
 
         if (instance == null) // If the MusicControlScript instance variable is null
         {
