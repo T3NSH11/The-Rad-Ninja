@@ -5,106 +5,140 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    public Camera cam;
+    GameObject cameraObj; // the camera object. in the prefab, this is the first child of the obj with this script
+    Camera cam; // reference to above object's camera component
 
-    public Transform player;
-    [SerializeField] Vector3 offset = new Vector3(0, 0, 0); 
-    Vector3 playerPosition;  // player position, plus our camera's offset, aka our target
+    public Transform playerTarget; // the target to follow.
 
-
-
-
+    
+    /// input
     float horizontalInput;
     float verticalInput;
-    [SerializeField] float mouseSensitivity = 20f;
+    [SerializeField] float mouseSensitivity = 16.3f;
 
-    [SerializeField] float minYRot = -30f;
-    [SerializeField] float maxYRot = 70f;  // control how high and low the camera can move
-
-    KeyCode resetPositionKey = KeyCode.P;
+    [SerializeField] float minYRotation = -30f;
+    [SerializeField] float maxYRotation = 60f;  // control how high and low the camera can move
 
 
-    Vector3 desiredPosition;     // final position for the camera to move to after calculation
-    Vector3 adjustedDesiredPos; 
 
-    [SerializeField] float distanceFromPlayer = 4;
-    [SerializeField] float adjustedDistance;   // used in calculating desiredPosition and adjustedDesiredPos, respectively
+    /// movement
+    //Vector3 desiredPosition;     // final position for the camera to move to after calculation
+    //Vector3 adjustedDesiredPos; 
+
+    [SerializeField] float distanceFromPlayer = 4f; // how far the camera should be
+                     float adjustedDistance;  // used to calculate new camera distance when colliding.
+
+    [SerializeField] float shoulderOffset = 0.8f; // offsets camera position to the side of the player character, depending on how high the value is.
+
 
     Vector3 followSmoothing;
-    [SerializeField] float movementSpeed = 0.2f; // used for the SmoothDamp in camera movement.
+    Vector3 collisionSmoothing;
+    [SerializeField] float movementSpeed = 0.11f; // used for the Lerp in camera movement.
+
+    [SerializeField] float rotationSpeed = .17f; // for Lerp in rotation.
 
 
-    Vector3 rotationSmoothing;
-    [SerializeField] float rotationDuration = .17f; // for SmoothDamp in rotation
+    
+    /// collision handling
+    //public LayerMask collisionLayer;
+
+    Vector3[] clipPoints;
+    [SerializeField] float clippingRadius = 3.41f; // how wide the space for checking collision should be
 
 
-
-
-    public LayerMask collisionLayer;
-    CameraCollisionHandler collisionHandler; // see collisionhandler below
-
-
-
-
+    
     void Start(){
 
-        player = GameObject.Find("CameraTracker").transform;
+        playerTarget = GameObject.Find("CameraTracker").transform;
         Cursor.lockState = CursorLockMode.Locked;
 
         
-        cam = Camera.main;
-        collisionHandler = new CameraCollisionHandler(cam, collisionLayer);
-        
+        cameraObj = gameObject.transform.GetChild(0).gameObject;
+        cam = cameraObj.GetComponent<Camera>();
+
+        clipPoints = new Vector3[5];
+
     }
 
 
     // get and adjust player input values here.
     void Update(){
 
-
         horizontalInput += Input.GetAxis("Mouse X") * mouseSensitivity;
         verticalInput -= Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        verticalInput = Mathf.Clamp(verticalInput, minYRot, maxYRot); // split input to separate axes to clamp the y
+        verticalInput = Mathf.Clamp(verticalInput, minYRotation, maxYRotation); // split input to separate axes to clamp the y
 
-        if (Input.GetKey(resetPositionKey))
+        /*if (Input.GetKey(resetPositionKey))
         {
             horizontalInput = -player.forward.x;
             verticalInput = -player.forward.y;
-        }
+        }*/
 
     }
 
 
     // move and rotate camera according to input.
-    void FixedUpdate(){
+    void LateUpdate() {
+
+        //Vector3 currentCamPos = new Vector3(transform.position.x + shoulderOffset, transform.position.y, transform.position.z);
+
+        // move this object to the player and rotate it through mouse input (child obj camera moves with it).
+        transform.position = Vector3.SmoothDamp(transform.position,
+                                                playerTarget.position, ref followSmoothing,
+                                                movementSpeed);
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, 
+                                             Quaternion.Euler(verticalInput, horizontalInput, 0),
+                                             rotationSpeed);
 
 
-        /*
-        if (!colliding && Vector3.Distance(playerPosition, transform.position) < 0.2)
+        // adjust camera's relative position on z depending on collision.
+        if (ClipPointCollisionDetected(transform.position))
         {
-            transform.position = Vector3.MoveTowards(playerPosition, transform.position, avoidanceSpeed * Time.deltaTime);
+            adjustedDistance = GetCollisionDistance(transform.position);
+
+            cameraObj.transform.localPosition = Vector3.SmoothDamp(cameraObj.transform.localPosition,
+                                                         new Vector3(shoulderOffset, 0, -adjustedDistance + 0.2f), 
+                                                         ref collisionSmoothing, movementSpeed);
+        }
+        else
+        { 
+        cameraObj.transform.localPosition = Vector3.SmoothDamp(cameraObj.transform.localPosition,
+                                                         new Vector3(shoulderOffset, 0, -distanceFromPlayer), 
+                                                         ref collisionSmoothing, movementSpeed);
+        }
+        //transform.rotation = transform.rotation * Quaternion.Euler(0, offset2, 0);//transform.rotation.z * -1.77f);
+
+
+
+        // update collision-checking ray positions with the camera position
+        UpdateClipPoints(transform.position, distanceFromPlayer + 0.3f);
+
+
+        
+        for (int i = 0; i < 5; i++)
+        {
+            Debug.DrawLine(transform.position, clipPoints[i], Color.yellow);
         }
 
-        if (Physics.Linecast(playerPosition, transform.position * collisionSpacing, out hit, collisionLayer))
-        {
 
-            desiredPosition = Quaternion.Euler(verticalInput, horizontalInput, 0)
-                                * (Vector3.back * hit.distance * distanceAdjustment);//new Vector3(0, 0, -Vector3.Distance(transform.position, hit.point));
-            Debug.DrawLine(playerPosition, transform.position, Color.red);
-            
+    }
+
+        /*if (collisionHandler.ClipPointCollisionDetected(playerPosition))
+        {
+            adjustedDistance = collisionHandler.GetClipDistance(playerPosition);
+            //adjustedDistance = Mathf.Clamp(adjustedDistance, minDistFromPlayer, distanceFromPlayer);
+
+            cameraObj.transform.localPosition = Vector3.back * adjustedDistance;
         }
         else
         {
-            Debug.DrawLine(playerPosition, transform.position, Color.green);
-        }
+            cameraObj.transform.localPosition = Vector3.back * distanceFromPlayer;
+        }*/
 
-        desiredPosition = Quaternion.Euler(verticalInput, horizontalInput, 0) * (Vector3.back * distanceFromPlayer);
-        //desiredPosition += playerPosition;
-        transform.position = desiredPosition; //Vector3.SmoothDamp(transform.position, desiredPosition, ref followSmoothing, movementSpeed);
-        */
-        
 
+        /*
         /// movement
         playerPosition = player.position + offset;
         
@@ -119,102 +153,66 @@ public class CameraController : MonoBehaviour
             adjustedDesiredPos = Quaternion.Euler(verticalInput, horizontalInput, 0) * (Vector3.back * adjustedDistance);
             adjustedDesiredPos += playerPosition;
 
-            transform.position = Vector3.SmoothDamp(transform.position, adjustedDesiredPos, ref followSmoothing, movementSpeed);
+            transform.position = Vector3.Lerp(transform.position, adjustedDesiredPos, movementSpeed);
             //transform.position = adjustedDesiredPos;
         }
         else
         {
-            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref followSmoothing, movementSpeed);
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, movementSpeed);
             //transform.position = desiredPosition;
         }
 
 
 
-
+        
         /// rotation 
-        transform.rotation = Quaternion.Euler(
-                        Vector3.SmoothDamp(transform.rotation.eulerAngles, playerPosition - transform.position, 
-                                ref rotationSmoothing, rotationDuration));
-        transform.LookAt(playerPosition);
+        //transform.rotation = Quaternion.Euler(
+                        //Vector3.SmoothDamp(transform.rotation.eulerAngles, playerPosition - transform.position, 
+                                //ref rotationSmoothing, rotationDuration));
+        transform.LookAt(playerPosition + new Vector3(0,0,2));
 
         //Quaternion desiredRotation = Quaternion.LookRotation(playerPosition - transform.position);
         //transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, rotationDuration);
+        */
 
 
 
 
-        /// collision update
-        collisionHandler.UpdateClipPoints(desiredPosition, transform.rotation, collisionHandler.desiredClipPoints);
 
-        adjustedDistance = collisionHandler.GetClipDistance(playerPosition);
-
-        /*for (int i = 0; i < 5; i++)
-        {
-            //Debug.DrawLine(playerPosition, collisionHandler.adjustedClipPoints[i], Color.white);
-            Debug.DrawLine(playerPosition, collisionHandler.desiredClipPoints[i], Color.yellow);
-        }*/
-
-    }
-
-
-}
-
-
-
-
-[System.Serializable]
-public class CameraCollisionHandler
-{
-    public LayerMask collisionLayer;
-
-
-    //public Vector3[] adjustedClipPoints;
-    public Vector3[] desiredClipPoints;
-    public float clippingDistance = 3.41f;
-
-    public Camera camera;
-    
-    public CameraCollisionHandler(Camera cam, LayerMask layer){
-
-        camera = cam;
-        //adjustedClipPoints = new Vector3[5];
-        desiredClipPoints = new Vector3[5];
-        collisionLayer = layer;
-        
-    }
 
 
     // use near clip plane / corners of the camera view as reference for collision checking raycast.
-    public void UpdateClipPoints(Vector3 cameraPos, Quaternion currentRotation, Vector3[] clipPointArray){
+    void UpdateClipPoints(Vector3 cameraPos, float distanceToCam){
 
 
         // get the corners and middle of the start of the camera's frustrum, depending on FOV and aspect
-        float z = camera.nearClipPlane; 
-        float x = Mathf.Tan(camera.fieldOfView / clippingDistance) * z;
-        float y = x / camera.aspect;
+        float z = cam.nearClipPlane; 
+        float x = Mathf.Tan(cam.fieldOfView / clippingRadius) * z;
+        float y = x / cam.aspect;
 
-
+        //Quaternion rotation = Quaternion.Euler(cameraObj.transform.rotation.x * shoulderOffset, cameraObj.transform.rotation.y, cameraObj.transform.rotation.z);
         // add each corner to an array
-        clipPointArray[0] = (currentRotation * new Vector3(-x, y, z)) + cameraPos; // top left
-        clipPointArray[1] = (currentRotation * new Vector3(x, y, z)) + cameraPos; // top right
-        clipPointArray[2] = (currentRotation * new Vector3(-x, -y, z)) + cameraPos; // bottom left
-        clipPointArray[3] = (currentRotation * new Vector3(x, -y, z)) + cameraPos; // bottom right
-        clipPointArray[4] = cameraPos - camera.transform.forward;
-
+        clipPoints[0] = (cameraObj.transform.rotation * new Vector3(-x, y, z - distanceToCam)) + cameraPos; // top left
+        clipPoints[1] = (cameraObj.transform.rotation * new Vector3(x, y, z - distanceToCam)) + cameraPos; // top right
+        clipPoints[3] = (cameraObj.transform.rotation * new Vector3(x, -y, z - distanceToCam)) + cameraPos; // bottom right
+        clipPoints[2] = (cameraObj.transform.rotation * new Vector3(-x, -y, z - distanceToCam)) + cameraPos; // bottom left
+        clipPoints[4] = cameraPos - cam.transform.forward * distanceToCam;// (cameraObj.transform.rotation * new Vector3(cameraPos.x * (shoulderOffset * 2), cameraPos.y, cameraPos.z - distanceToCam)) + cameraPos;// - cam.transform.forward * distanceFromPlayer;// cameraPos - cam.transform.forward + new Vector3(shoulderOffset, 0, distanceToCam);
+                                                                                            //new Vector3(cameraPos.x + shoulderOffset, cameraPos.y, cameraPos.z);
+                                                                                            // cameraObj.transform.rotation * new Vector3(cameraObj.transform.position.x + shoulderOffset, cameraObj.transform.position.y, cameraObj.transform.position.z - distanceToCam);
     }
 
 
     // check each point of our array for ray collision
-    public bool ClipPointCollisionDetected(Vector3 fromPosition){
+    bool ClipPointCollisionDetected(Vector3 fromPosition){
 
 
-        for (int i = 0; i < desiredClipPoints.Length; i++){
+        for (int i = 0; i < clipPoints.Length; i++){
 
-            Ray ray = new Ray(fromPosition, desiredClipPoints[i] - fromPosition);
-            float distance = Vector3.Distance(desiredClipPoints[i], fromPosition);
+            Ray ray = new Ray(fromPosition, clipPoints[i] - fromPosition);
+            float distance = Vector3.Distance(clipPoints[i], fromPosition);
 
 
-            if (Physics.Raycast(ray, distance, collisionLayer))
+            if (Physics.Raycast(ray, distance))
                 return true;
 
         }
@@ -225,31 +223,35 @@ public class CameraCollisionHandler
 
 
     // find the closest collision point out of the array and return it.
-    public float GetClipDistance(Vector3 fromPosition){
+    float GetCollisionDistance(Vector3 fromPosition){
 
 
-        float clipDistance = -1; // set clip distance to -1 so we can set it in our loop
+        float collidingDistance = -1; // set raycast hit distance to -1 so we can set it in our loop
 
-        for (int i = 0; i < desiredClipPoints.Length; i++)
+
+        for (int i = 0; i < clipPoints.Length; i++)
         {
 
-            Ray ray = new Ray(fromPosition, desiredClipPoints[i] - fromPosition);
+            Ray ray = new Ray(fromPosition, clipPoints[i] - fromPosition);
             RaycastHit hit;
 
-
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.collider.enabled)
             {
-                if (clipDistance == -1)
-                    clipDistance = hit.distance;
+                //colliding = true;
 
 
-                else if (hit.distance < clipDistance)
-                    clipDistance = hit.distance; 
+                if (collidingDistance == -1)
+                    collidingDistance = hit.distance;
+
+
+                else if (hit.distance < collidingDistance)
+                    collidingDistance = hit.distance; 
             }
-
+            //else
+                //colliding = false;
         }
 
-        return clipDistance;
+        return collidingDistance;
 
     }
 

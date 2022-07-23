@@ -14,6 +14,10 @@ public class PlayerHealth : MonoBehaviour
     float lowHealth;
     float healthbarLerpValue;
 
+    static bool invulnerable;
+    static float invulnerabilityTimer;
+    static float invulnerabilityLength;
+
 
 
     void Start(){
@@ -43,17 +47,6 @@ public class PlayerHealth : MonoBehaviour
             // go to game over screen
         }
 
-        /*
-        if (DialogueHandler.dialogueActive)
-        {
-            healthbarSlider.gameObject.SetActive(false);
-        }
-
-        if (!DialogueHandler.dialogueActive)
-        {
-            healthbarSlider.gameObject.SetActive(true);
-        }*/
-
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -61,13 +54,35 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    static void TakeDamage(float damageToDeal)
+    public static void TakeDamage(float damageToDeal)
     {
-        currentHealth -= damageToDeal;
+        if (!invulnerable)
+        {
+            invulnerable = true;
+            currentHealth -= damageToDeal;
+
+            invulnerabilityTimer = invulnerabilityLength;
+            Countdown();
+        }
+    }
+
+    static void Countdown()
+    {
+        invulnerabilityTimer -= Time.deltaTime;
+
+        if (invulnerabilityTimer > 0)
+            Countdown();
+        else
+            invulnerable = false;
     }
 
     /*static void Heal(float healAmount){
         currentHealth += healAmount;
     }*/
+
+    public static void SetHealth(float setTo)
+    {
+        currentHealth = setTo;
+    }
 
 }
