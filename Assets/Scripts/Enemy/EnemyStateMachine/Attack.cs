@@ -7,20 +7,20 @@ public class Attack : EnemyState
     float Attackcooldown;
     public override void StartState(EnemyManager manager)
     {
-        Attackcooldown = 0;
         manager.Player.GetComponent<PlayerHealth>().TakeDamage(manager.AttackDamage);
     }
 
     public override void UpdateState(EnemyManager manager)
     {
         manager.transform.LookAt(manager.Player.transform.position);
-        if (Attackcooldown <= 0)
+        if (manager.Attackcooldown <= 0)
         {
+            manager.MyAnimator.SetTrigger("Attack");
             manager.Player.GetComponent<PlayerHealth>().TakeDamage(manager.AttackDamage);
             Attackcooldown = 2;
         }
         else
-            Attackcooldown -= Time.deltaTime;
+            manager.Attackcooldown -= Time.deltaTime;
 
         if(!manager.FOV.PlayerDetected)
         {

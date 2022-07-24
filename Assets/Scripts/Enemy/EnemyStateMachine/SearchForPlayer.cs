@@ -9,6 +9,7 @@ public class SearchForPlayer : EnemyState
     public override void StartState(EnemyManager manager)
     {
         Path = manager.Pathfinder.FindPath(manager.gameObject.transform.position, manager.LastPlayerLoc);
+        manager.mDesiredAnimationSpeed = 0.5f;
     }
 
     public override void UpdateState(EnemyManager manager)
@@ -17,7 +18,7 @@ public class SearchForPlayer : EnemyState
 
         if(PathFollowed == true)
         {
-            manager.SwitchState(manager.GoToPath);
+            manager.SwitchState(manager.FollowPath);
         }
 
         if(manager.FOV.PlayerDetected)

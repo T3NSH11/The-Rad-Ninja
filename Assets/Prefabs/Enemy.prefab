@@ -1132,7 +1132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4768439191559721596}
   - component: {fileID: 5018803646168216977}
-  - component: {fileID: 5018803646168216976}
+  - component: {fileID: 5401334380647740830}
+  - component: {fileID: 5018803645860592895}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1175,7 +1176,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5018803646168216976
+--- !u!114 &5401334380647740830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1189,22 +1190,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyHead: {fileID: 0}
   Player: {fileID: 0}
-  FOV: {fileID: 0}
+  FOV: {fileID: 5018803645860592895}
   DetectionLevel: 0
-  WanderDetectionRequired: 0
-  AlertDetectionSpeedRequired: 0
+  WanderDetectionRequired: 7
+  AlertDetectionSpeedRequired: 3
   LastPlayerLoc: {x: 0, y: 0, z: 0}
-  RunSpeed: 0
+  RunSpeed: 6
   WanderPath: []
-  WalkSpeed: 0
-  waypointDist: 0
-  rotationSpeed: 0
+  WalkSpeed: 3
+  waypointDist: 0.2
+  rotationSpeed: 3
   patrolPaths: []
   PathNodes: []
   currentPath_NodeID: 0
   current_SetPath: {fileID: 0}
-  AttackRange: 0
-  AttackDamage: 0
+  AttackRange: 1
+  AttackDamage: 30
+  Attackcooldown: 0
+  AnimationBlendSpeed: 1
+  mDesiredAnimationSpeed: 0
+  MyAnimator: {fileID: 5018803646168216977}
+--- !u!114 &5018803645860592895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5289256222217177286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73883794b568e9541ae316a91541534c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RangeRadius: 100
+  FOVAngle: 90
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  WallMask:
+    serializedVersion: 2
+    m_Bits: 256
+  PlayerDetected: 0
+  directionToPlayer: {x: 0, y: 0, z: 0}
+  PlayerTransform: {fileID: 0}
 --- !u!1 &5378247726819863453
 GameObject:
   m_ObjectHideFlags: 0
