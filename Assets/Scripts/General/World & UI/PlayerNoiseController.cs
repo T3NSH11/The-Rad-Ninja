@@ -44,18 +44,6 @@ public class PlayerNoiseController : MonoBehaviour
                                             ref decreaseRef,
                                             rateOfDecrease);
 
-        /*
-        if (DialogueHandler.dialogueActive)
-        {
-            noiseLevelSlider.gameObject.SetActive(false);
-        }
-
-        if (!DialogueHandler.dialogueActive)
-        {
-            noiseLevelSlider.gameObject.SetActive(true);
-        }*/
-
-
         if (Input.GetKey(KeyCode.B))
         {
             IncreaseNoise(increaseBy, maxSound);

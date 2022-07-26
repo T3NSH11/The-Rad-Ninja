@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 635773839}
   - component: {fileID: 635773838}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI Elements
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,7 +458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   player: {fileID: 702399010}
-  offset: {x: 0, y: 0, z: 0}
+  offset: 10
+  zoom: 1
   mouseSensitivity: 19.3
   minYRot: -20
   maxYRot: 70
@@ -1323,8 +1324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 314, y: -58.485}
-  m_SizeDelta: {x: 282.563, y: 37.214}
+  m_AnchoredPosition: {x: 303.741, y: -60.02}
+  m_SizeDelta: {x: 272.304, y: 40.285}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1175994332
 MonoBehaviour:
