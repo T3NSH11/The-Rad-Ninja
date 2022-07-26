@@ -260,7 +260,8 @@ public class Pathfinder
         }
 
         Object.transform.LookAt(TargetPos);
-        Object.transform.position = Vector3.MoveTowards(Object.transform.position, TargetPos, Speed * Time.deltaTime);
+        
+        //Object.transform.position = Vector3.MoveTowards(Object.transform.position, TargetPos, Speed * Time.deltaTime);
         //Object.GetComponent<Rigidbody>().velocity += (TargetPos - Object.transform.position).normalized * (Speed * Time.deltaTime);
         //Object.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(Object.GetComponent<Rigidbody>().velocity, Speed);
         return false;

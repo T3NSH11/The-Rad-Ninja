@@ -6,15 +6,15 @@ public class ChasePlayer : EnemyState
 {
     public override void StartState(EnemyManager manager)
     {
-
+        manager.mDesiredAnimationSpeed = 1f;
     }
 
     public override void UpdateState(EnemyManager manager)
     {
         if(manager.FOV.PlayerDetected == true)
         {
-            manager.gameObject.transform.position += (manager.Player.transform.position - manager.transform.position).normalized * manager.RunSpeed * Time.deltaTime;
-            manager.transform.LookAt(manager.Player.transform.position);
+            //manager.gameObject.transform.position += (manager.Player.transform.position - manager.transform.position).normalized * manager.RunSpeed * Time.deltaTime;
+            //manager.transform.LookAt(new Vector3(manager.Player.transform.position.x, manager.transform.position.y, manager.Player.transform.position.x));
         }
         else
         {

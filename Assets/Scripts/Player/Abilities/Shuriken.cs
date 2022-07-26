@@ -2,30 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shuriken : AbilityBase
+public class Shuriken : MonoBehaviour
 {
-    Vector3 rayOrigin = new Vector3(0.5f, 0.5f, 0f);
-    public override void Activation(AbilityMain main)
+    private void OnTriggerEnter(Collider other)
     {
-        Ray ray = Camera.main.ViewportPointToRay(rayOrigin);
-
-        if (Input.GetMouseButtonDown(1))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            main.CameraObj.GetComponent<Tempcamera>().distance = 4;
-            main.Crosshair.SetActive(true);
+            Destroy(other.gameObject);
         }
-
-        if (Input.GetMouseButtonUp(1))
+        else if (!other.gameObject.CompareTag("Enemy") && !other.gameObject.CompareTag("Player"))
         {
-            main.CameraObj.GetComponent<Tempcamera>().distance = 7;
-            main.Crosshair.SetActive(false);
-        }
-
-        if (Input.GetMouseButtonDown(0) && Input.GetMouseButton(1))
-        {
-            GameObject shureken = GameObject.Instantiate(main.ShurikenObj, main.Player.transform.position, Quaternion.identity);
-            
-            shureken.GetComponent<Rigidbody>().AddForce((ray.GetPoint(1000) - main.Player.transform.position).normalized * main.ShurikenSpeed);
+            Destroy(gameObject);
         }
     }
 }

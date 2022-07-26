@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
     Vector3 desiredPosition;     // final position for the camera to move to after calculation
     Vector3 adjustedDesiredPos; 
 
-    [SerializeField] float distanceFromPlayer = 4;
+    [SerializeField] public float distanceFromPlayer = 4;
     [SerializeField] float adjustedDistance;   // used in calculating desiredPosition and adjustedDesiredPos, respectively
 
     Vector3 followSmoothing;

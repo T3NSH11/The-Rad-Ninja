@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
     public EnemyState Idle;
     public EnemyState Attack;
     public EnemyState Detect;
-    public EnemyState GoToPath;
+    public EnemyState FollowPath;
 
     #endregion
     #endregion
@@ -52,6 +52,15 @@ public class EnemyManager : MonoBehaviour
     [Header("Attack Settings")]
     public float AttackRange;
     public float AttackDamage;
+    public float Attackcooldown;
+    #endregion
+
+    #region Animations
+    [Header("Animation Settings")]
+    public float AnimationBlendSpeed = 2f;
+    public float mDesiredAnimationSpeed = 0f;
+    CharacterController MyController;
+    public Animator MyAnimator;
     #endregion
     #endregion
 
@@ -65,9 +74,11 @@ public class EnemyManager : MonoBehaviour
         Idle = new Idle();
         Attack = new Attack();
         Detect = new Detect();
-        GoToPath = new GoToPath();
-        CurrentState = Wander;
+        FollowPath = new FollowPath();
+        CurrentState = ChasePlayer;
         #endregion
+
+        MyAnimator = GetComponent<Animator>();
 
         CurrentState.StartState(this);
     }
@@ -76,6 +87,7 @@ public class EnemyManager : MonoBehaviour
     {
         CurrentState.UpdateState(this);
         Debug.Log(CurrentState);
+        MyAnimator.SetFloat("Speed", Mathf.Lerp(MyAnimator.GetFloat("Speed"), mDesiredAnimationSpeed, AnimationBlendSpeed * Time.deltaTime));
     }
 
     public void SwitchState(EnemyState state)
