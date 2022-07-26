@@ -14,7 +14,7 @@ public class ChasePlayer : EnemyState
         if(manager.FOV.PlayerDetected == true)
         {
             //manager.gameObject.transform.position += (manager.Player.transform.position - manager.transform.position).normalized * manager.RunSpeed * Time.deltaTime;
-            manager.transform.LookAt(new Vector3(manager.Player.transform.position.x, manager.transform.position.y, manager.Player.transform.position.x));
+            //manager.transform.LookAt(new Vector3(manager.Player.transform.position.x, manager.transform.position.y, manager.Player.transform.position.x));
         }
         else
         {

@@ -75,7 +75,7 @@ public class EnemyManager : MonoBehaviour
         Attack = new Attack();
         Detect = new Detect();
         FollowPath = new FollowPath();
-        CurrentState = Wander;
+        CurrentState = ChasePlayer;
         #endregion
 
         MyAnimator = GetComponent<Animator>();
