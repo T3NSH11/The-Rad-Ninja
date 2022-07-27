@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public static void TakeDamage(float damageToDeal)
+    public void TakeDamage(float damageToDeal)
     {
         if (!invulnerable)
         {

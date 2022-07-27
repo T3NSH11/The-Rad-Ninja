@@ -7,6 +7,7 @@ TagManager:
   - Grid
   - Obstacle
   - Enemy
+  - Cripto
   layers:
   - Default
   - TransparentFX

@@ -39,7 +39,7 @@ public class DialogueHandler : MonoBehaviour
         displayText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
 
-        playerController = GameObject.Find("Player").GetComponent<ThirdPersonController>();
+        playerController = GameObject.Find("Cripto").GetComponent<ThirdPersonController>();
         playerHUD = GameObject.Find("HUD");
 
 
