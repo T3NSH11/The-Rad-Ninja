@@ -14,6 +14,10 @@ public class PlayerHealth : MonoBehaviour
     float lowHealth;
     float healthbarLerpValue;
 
+    static bool invulnerable;
+    static float invulnerabilityTimer;
+    static float invulnerabilityLength;
+
 
 
     void Start(){
@@ -21,15 +25,15 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         lowHealth = maxHealth / 3;
 
-        //healthbarSlider.maxValue = maxHealth;
-        //healthbarSlider.value = currentHealth;
+        healthbarSlider.maxValue = maxHealth;
+        healthbarSlider.value = currentHealth;
     }
 
 
     void Update(){
 
         //healthbarLerpValue = Mathf.MoveTowards(healthbarSlider.value, currentHealth, slideSpeed);
-        //healthbarSlider.value = currentHealth;//Mathf.Lerp(healthbarSlider.value, currentHealth, slideSpeed);
+        healthbarSlider.value = currentHealth;//Mathf.Lerp(healthbarSlider.value, currentHealth, slideSpeed);
 
 
         if (currentHealth <= lowHealth)
@@ -43,36 +47,42 @@ public class PlayerHealth : MonoBehaviour
             // go to game over screen
         }
 
-        /*
-        if (DialogueHandler.dialogueActive)
-        {
-            healthbarSlider.gameObject.SetActive(false);
-        }
-
-        if (!DialogueHandler.dialogueActive)
-        {
-            healthbarSlider.gameObject.SetActive(true);
-        }*/
-
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             TakeDamage(5);
         }
+    }
 
-        if(currentHealth <= 0)
+    public static void TakeDamage(float damageToDeal)
+    {
+        if (!invulnerable)
         {
-            Debug.Log("Dead");
+            invulnerable = true;
+            currentHealth -= damageToDeal;
+
+            invulnerabilityTimer = invulnerabilityLength;
+            Countdown();
         }
     }
 
-    public void TakeDamage(float damageToDeal)
+    static void Countdown()
     {
-        currentHealth -= damageToDeal;
+        invulnerabilityTimer -= Time.deltaTime;
+
+        if (invulnerabilityTimer > 0)
+            Countdown();
+        else
+            invulnerable = false;
     }
 
     /*static void Heal(float healAmount){
         currentHealth += healAmount;
     }*/
+
+    public static void SetHealth(float setTo)
+    {
+        currentHealth = setTo;
+    }
 
 }

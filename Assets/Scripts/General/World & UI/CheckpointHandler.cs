@@ -41,20 +41,28 @@ public class CheckpointHandler : MonoBehaviour
     // should be called when entering a playable scene.
     public static void Respawn(){
 
-        //if (currentSavedSpawn == Vector3.zero)
-            //currentSavedSpawn = defaultSpawnpoint;
+        if (currentSavedSpawn == Vector3.zero)
+            currentSavedSpawn = defaultSpawnpoint;
 
         player.transform.position = currentSavedSpawn;
-            Debug.Log("respawn called");
         
     }
 
     public static void SetRespawn(Vector3 checkpointPos){
 
         currentSavedSpawn = checkpointPos;
-        Debug.Log("spawn set");
 
         if(autosaveEnabled)
             SaveLoad.Save(); // save (including current checkpoint) when a checkpoint is reached.
     }
+
+    // version of the function that allows you to check if the autosave 
+    public static void SetRespawn(Vector3 checkpointPos, bool saveEnabled){
+
+        currentSavedSpawn = checkpointPos;
+
+        if (autosaveEnabled)
+            SaveLoad.Save(); 
+    }
+
 }

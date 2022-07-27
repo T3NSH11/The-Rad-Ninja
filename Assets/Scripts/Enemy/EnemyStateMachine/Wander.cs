@@ -6,13 +6,13 @@ public class Wander : EnemyState
 {
     public override void StartState(EnemyManager manager)
     {
-        
+        manager.mDesiredAnimationSpeed = 0.15f;
     }
 
     public override void UpdateState(EnemyManager manager)
     {
         float node_Distance = Vector3.Distance(manager.current_SetPath.pathNodes[manager.currentPath_NodeID].position, manager.transform.position);
-        manager.transform.position = Vector3.MoveTowards(manager.transform.position, manager.current_SetPath.pathNodes[manager.currentPath_NodeID].position, Time.deltaTime * manager.WalkSpeed);
+        //manager.transform.position = Vector3.MoveTowards(manager.transform.position, manager.current_SetPath.pathNodes[manager.currentPath_NodeID].position, Time.deltaTime * manager.WalkSpeed);
 
         var object_Rotation = Quaternion.LookRotation(manager.current_SetPath.pathNodes[manager.currentPath_NodeID].position - manager.transform.position);
         manager.transform.rotation = Quaternion.Slerp(manager.transform.rotation, object_Rotation, Time.deltaTime * manager.rotationSpeed);
@@ -36,7 +36,7 @@ public class Wander : EnemyState
         
         if (Vector3.Distance(manager.gameObject.transform.position, manager.Player.transform.position) < manager.AttackRange)
         {
-            
+            manager.SwitchState(manager.Attack);
         }
     }
 }

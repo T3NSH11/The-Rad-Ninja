@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoToPath : EnemyState
+public class FollowPath : EnemyState
 {
     Stack<Vector3> Path;
     public override void StartState(EnemyManager manager)

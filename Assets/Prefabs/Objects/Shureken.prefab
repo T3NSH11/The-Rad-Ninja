@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9180159519747520205}
   - component: {fileID: 4869295701749297897}
   - component: {fileID: 6907559087294370006}
+  - component: {fileID: -939860646590931579}
   m_Layer: 0
   m_Name: Shureken
   m_TagString: Untagged
@@ -57,11 +58,23 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9180159519747520204}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.09172869, y: 0.013319969, z: 0.085226536}
   m_Center: {x: -0.0016272068, y: 0.00037193298, z: 0.0005886555}
+--- !u!114 &-939860646590931579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9180159519747520204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9fd654df0403842a4b30875fa6e58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9180159519572229570
 PrefabInstance:
   m_ObjectHideFlags: 0
