@@ -10,6 +10,7 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField] protected KeyCode interactionKey = KeyCode.K;
 
     public static bool interactionActive { get; protected set; }
+    protected bool hasBeenChecked;
     bool inRange;
     //GameObject playerHUD;
 
@@ -32,7 +33,7 @@ public abstract class Interactable : MonoBehaviour
 
     void Update(){
 
-        if (inRange && !interactionActive && Input.GetKeyDown(interactionKey))
+        if (inRange && !interactionActive && !hasBeenChecked && Input.GetKeyDown(interactionKey))
         {
             // play the "interacting" animation
             InteractionEvent();
@@ -73,7 +74,7 @@ public abstract class Interactable : MonoBehaviour
     
     private void OnTriggerEnter(Collider other){
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasBeenChecked)
         {
             // highlight gameobject
             // display interactable icon on canvas

@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Grid
-  - Interactable
+  - Obstacle
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -113,7 +113,7 @@ MonoBehaviour:
   interactionKey: 107
   interactionIcon: {fileID: 0}
   itemName: Item Sample Text
-  itemDescription: some more of the sample text etc.
+  itemDescription: some more demonstrative text, etc. etc.
   itemImageTexture: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
   narration: {fileID: 0}
 --- !u!135 &5424880973502393862
@@ -127,8 +127,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6215463
-  m_Center: {x: 0, y: 0, z: -0.22823048}
+  m_Radius: 0.81815463
+  m_Center: {x: 0, y: 0, z: -0.10430782}
 --- !u!1 &8805145782503311526
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ Transform:
   m_GameObject: {fileID: 8805145782503311526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.47, z: 1}
   m_Children: []
   m_Father: {fileID: 5424880973502393861}
   m_RootOrder: 0
@@ -169,18 +169,18 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8805145782503311526}
   serializedVersion: 7
-  lengthInSec: 5
-  simulationSpeed: 1
+  lengthInSec: 0.55
+  simulationSpeed: 0.92
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
-  useRigidbodyForVelocity: 1
+  useRigidbodyForVelocity: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -297,7 +297,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.47
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -349,7 +349,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
@@ -730,8 +730,8 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     maxNumParticles: 1000
-    size3D: 0
-    rotation3D: 0
+    size3D: 1
+    rotation3D: 1
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
@@ -1424,7 +1424,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1432,8 +1432,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+        key1: {r: 0.34509805, g: 0.34509805, b: 0.34509805, a: 0.58431375}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1613,7 +1613,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -1670,7 +1670,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 2.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2

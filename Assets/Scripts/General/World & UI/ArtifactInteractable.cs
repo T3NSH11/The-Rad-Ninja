@@ -76,10 +76,11 @@ public class ArtifactInteractable : Interactable
             particles.Play();
             //particles.Emit(50);
             transform.DetachChildren();
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
 
 
             interactionActive = false;
+            hasBeenChecked = true;
 
             yield break; // exit waiiting loop
         }
