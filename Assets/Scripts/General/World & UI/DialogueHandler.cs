@@ -7,7 +7,7 @@ using TMPro;
 public class DialogueHandler : MonoBehaviour
 {
     
-    static Image textbox;
+    static Image panel;
     static TextMeshProUGUI displayName;
     static TextMeshProUGUI displayText; // make sure these are parented to the obj with the script
 
@@ -35,7 +35,7 @@ public class DialogueHandler : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        textbox = gameObject.GetComponentInChildren<Image>();
+        panel = gameObject.GetComponentInChildren<Image>();
         displayText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
 
@@ -44,7 +44,7 @@ public class DialogueHandler : MonoBehaviour
 
 
         displayText.text = "";
-        textbox.gameObject.SetActive(false);
+        panel.gameObject.SetActive(false);
         dialogueActive = false;
 
     }
@@ -67,7 +67,7 @@ public class DialogueHandler : MonoBehaviour
         playerHUD.SetActive(false);
 
         // make textbox appear
-        textbox.gameObject.SetActive(true);
+        panel.gameObject.SetActive(true);
 
 
         currentDialogueText.Clear();
@@ -93,10 +93,13 @@ public class DialogueHandler : MonoBehaviour
             playerHUD.SetActive(true);
 
             displayText.text = "";
-            textbox.gameObject.SetActive(false);
+            panel.gameObject.SetActive(false);
+            Debug.Log("kasodksaod");
 
             return;
         }
+
+
 
 
         displayText.text = currentDialogueText[index]; // display text in the list at current index.
