@@ -12,7 +12,7 @@ public class DialogueHandler : MonoBehaviour
     static TextMeshProUGUI displayText; // make sure these are parented to the obj with the script
 
     static ThirdPersonController playerController;
-    static GameObject playerHUD;
+    static public GameObject playerHUD { get; private set; }
 
     static List<string> currentDialogueText = new List<string>(20);
     static List<AudioClip> currentDialogueAudio = new List<AudioClip>(20);

@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     //Vector3 desiredPosition;     // final position for the camera to move to after calculation
     //Vector3 adjustedDesiredPos; 
 
-    [SerializeField] public float distanceFromPlayer = 4f; // how far the camera should be
+              public float distanceFromPlayer = 4f; // how far the camera should be
                      float adjustedDistance;  // used to calculate new camera distance when colliding.
 
     [SerializeField] float shoulderOffset = 0.8f; // offsets camera position to the side of the player character, depending on how high the value is.
@@ -82,38 +82,40 @@ public class CameraController : MonoBehaviour
     void LateUpdate() {
 
         //Vector3 currentCamPos = new Vector3(transform.position.x + shoulderOffset, transform.position.y, transform.position.z);
-
-        // move this object to the player and rotate it through mouse input (child obj camera moves with it).
-        transform.position = Vector3.SmoothDamp(transform.position,
-                                                playerTarget.position, ref followSmoothing,
-                                                movementSpeed);
-
-        transform.rotation = Quaternion.Lerp(transform.rotation, 
-                                             Quaternion.Euler(verticalInput, horizontalInput, 0),
-                                             rotationSpeed);
-
-
-        // adjust camera's relative position on z depending on collision.
-        if (ClipPointCollisionDetected(transform.position))
+        if (Time.timeScale > 0f)
         {
-            adjustedDistance = GetCollisionDistance(transform.position);
+            // move this object to the player and rotate it through mouse input (child obj camera moves with it).
+            transform.position = Vector3.SmoothDamp(transform.position,
+                                                    playerTarget.position, ref followSmoothing,
+                                                    movementSpeed);
 
-            cameraObj.transform.localPosition = Vector3.SmoothDamp(cameraObj.transform.localPosition,
-                                                         new Vector3(shoulderOffset, 0, -adjustedDistance + 0.2f), 
-                                                         ref collisionSmoothing, movementSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation,
+                                                 Quaternion.Euler(verticalInput, horizontalInput, 0),
+                                                 rotationSpeed);
+
+
+            // adjust camera's relative position on z depending on collision.
+            if (ClipPointCollisionDetected(transform.position))
+            {
+                adjustedDistance = GetCollisionDistance(transform.position);
+
+                cameraObj.transform.localPosition = Vector3.SmoothDamp(cameraObj.transform.localPosition,
+                                                             new Vector3(shoulderOffset, 0, -adjustedDistance + 0.2f),
+                                                             ref collisionSmoothing, movementSpeed);
+            }
+            else
+            {
+                cameraObj.transform.localPosition = Vector3.SmoothDamp(cameraObj.transform.localPosition,
+                                                                 new Vector3(shoulderOffset, 0, -distanceFromPlayer),
+                                                                 ref collisionSmoothing, movementSpeed);
+            }
+            //transform.rotation = transform.rotation * Quaternion.Euler(0, offset2, 0);//transform.rotation.z * -1.77f);
+
+
+
+            // update collision-checking ray positions with the camera position
+            UpdateClipPoints(transform.position, distanceFromPlayer + 0.3f);
         }
-        else
-        { 
-        cameraObj.transform.localPosition = Vector3.SmoothDamp(cameraObj.transform.localPosition,
-                                                         new Vector3(shoulderOffset, 0, -distanceFromPlayer), 
-                                                         ref collisionSmoothing, movementSpeed);
-        }
-        //transform.rotation = transform.rotation * Quaternion.Euler(0, offset2, 0);//transform.rotation.z * -1.77f);
-
-
-
-        // update collision-checking ray positions with the camera position
-        UpdateClipPoints(transform.position, distanceFromPlayer + 0.3f);
 
 
         
