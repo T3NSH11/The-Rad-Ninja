@@ -6,79 +6,59 @@ using UnityEngine.UI;
 //TODO: need to find a way to make sure the player can't interact with multiple things at once
 public abstract class Interactable : MonoBehaviour
 {
-
-    [SerializeField] protected KeyCode interactionKey = KeyCode.K;
-
     public static bool interactionActive { get; protected set; }
-    protected bool hasBeenChecked;
     bool inRange;
-    //GameObject playerHUD;
-
-    public Image interactionIcon; 
-    //Texture2D interactionIconTexture;
+    Image interactionIcon;
 
 
     
 
-    protected void Start(){
-
-        interactionActive = false;
-
+    void Start(){
         interactionIcon = GameObject.Find("Interaction Icon").GetComponent<Image>();
-        interactionIcon.gameObject.SetActive(false);
-
-        //playerHUD = GameObject.Find("HUD");
-
     }
 
     void Update(){
 
-        if (inRange && !interactionActive && !hasBeenChecked && Input.GetKeyDown(interactionKey))
+        if (inRange && !interactionActive && Input.GetKeyDown(KeyCode.K))
         {
-            // play the "interacting" animation
             InteractionEvent();
         }
-
-        if (interactionActive)
-        {
-            interactionIcon.gameObject.SetActive(false);
-            //DialogueHandler.playerHUD.SetActive(false);
-        }
-
     }
 
 
-    public abstract void OnInteraction(); // what the object does when you interact with it goes here.
+    public abstract void OnInteraction();
 
     void InteractionEvent(){
 
         interactionActive = true;
         OnInteraction();
-        //interactionActive = false;
+        interactionActive = false;
         
     }
 
 
-    public void EnterRange(){
+    public void InRange(){
         inRange = true;
-        interactionIcon.gameObject.SetActive(true);
+        interactionIcon.enabled = true;
         // use outline shader here.
+        
     }
 
-    public void ExitRange(){
+    public void OutOfRange(){
         inRange = false;
-        interactionIcon.gameObject.SetActive(false);
+        interactionIcon.enabled = false;
     }
 
 
-    
+    /*
     private void OnTriggerEnter(Collider other){
 
-        if (other.CompareTag("Player") && !hasBeenChecked)
+        if (other.CompareTag("Player"))
         {
             // highlight gameobject
             // display interactable icon on canvas
-            this.EnterRange();
+            inRange = true;
+            interactionIcon.enabled = true;
         }
     }
 
@@ -88,7 +68,8 @@ public abstract class Interactable : MonoBehaviour
         {
             // dehighlight gameobject
             // remove interactable icon from canvas
-            this.ExitRange();
+            inRange = false;
+            interactionIcon.enabled = false;
         }
-    }
+    }*/
 }
