@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     //Vector3 desiredPosition;     // final position for the camera to move to after calculation
     //Vector3 adjustedDesiredPos; 
 
-    [SerializeField] float distanceFromPlayer = 4f; // how far the camera should be
+    [SerializeField] public float distanceFromPlayer = 4f; // how far the camera should be
                      float adjustedDistance;  // used to calculate new camera distance when colliding.
 
     [SerializeField] float shoulderOffset = 0.8f; // offsets camera position to the side of the player character, depending on how high the value is.
