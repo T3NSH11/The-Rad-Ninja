@@ -10,6 +10,7 @@ public class SearchForPlayer : EnemyState
     {
         Path = manager.Pathfinder.FindPath(manager.gameObject.transform.position, manager.LastPlayerLoc);
         manager.mDesiredAnimationSpeed = 0.5f;
+        manager.MyAnimator.SetBool("Moving", true);
     }
 
     public override void UpdateState(EnemyManager manager)

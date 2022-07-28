@@ -8,6 +8,8 @@ public class FollowPath : EnemyState
     public override void StartState(EnemyManager manager)
     {
         Path = manager.Pathfinder.FindPath(manager.transform.position, manager.current_SetPath.gameObject.transform.position);
+        manager.MyAnimator.SetBool("Moving", true);
+        manager.mDesiredAnimationSpeed = 0.15f;
     }
 
     public override void UpdateState(EnemyManager manager)

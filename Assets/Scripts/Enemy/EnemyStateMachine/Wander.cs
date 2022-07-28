@@ -7,6 +7,7 @@ public class Wander : EnemyState
     public override void StartState(EnemyManager manager)
     {
         manager.mDesiredAnimationSpeed = 0.15f;
+        manager.MyAnimator.SetBool("Moving", true);
     }
 
     public override void UpdateState(EnemyManager manager)
