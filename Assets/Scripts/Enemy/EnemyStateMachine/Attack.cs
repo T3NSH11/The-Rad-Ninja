@@ -15,6 +15,7 @@ public class Attack : EnemyState
         manager.transform.LookAt(manager.Player.transform.position);
         if (manager.Attackcooldown <= 0)
         {
+            manager.MyAnimator.SetBool("Moving", false);
             manager.MyAnimator.SetTrigger("Attack");
             manager.Player.GetComponent<PlayerHealth>().TakeDamage(manager.AttackDamage);
             Attackcooldown = 2;

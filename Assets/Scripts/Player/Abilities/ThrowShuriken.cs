@@ -33,5 +33,10 @@ public class ThrowShuriken : AbilityBase
             
             shureken.GetComponent<Rigidbody>().AddForce((ray.GetPoint(1000) - main.Player.transform.position).normalized * main.ShurikenSpeed);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            main.SwitchState(new Teleport());
+        }
     }
 }

@@ -6,7 +6,7 @@ public class Idle : EnemyState
 {
     public override void StartState(EnemyManager manager)
     {
-        // Play enemy Idle animation
+        manager.MyAnimator.SetBool("Moving", false);
     }
 
     public override void UpdateState(EnemyManager manager)

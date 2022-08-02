@@ -99,5 +99,10 @@ public class Teleport : AbilityBase
             main.Player.GetComponent<CharacterController>().enabled = true;
             main.TeleportMarker.SetActive(false);
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            main.SwitchState(new ThrowShuriken());
+        }
     }
 }

@@ -29,4 +29,9 @@ public class AbilityMain : MonoBehaviour
     {
         Ability.Activation(this);
     }
+
+    public void SwitchState(AbilityBase NewAbility)
+    {
+        Ability = NewAbility;
+    }
 }

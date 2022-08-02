@@ -7,6 +7,7 @@ public class ChasePlayer : EnemyState
     public override void StartState(EnemyManager manager)
     {
         manager.mDesiredAnimationSpeed = 1f;
+        manager.MyAnimator.SetBool("Moving", true);
     }
 
     public override void UpdateState(EnemyManager manager)
