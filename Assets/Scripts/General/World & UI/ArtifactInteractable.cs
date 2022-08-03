@@ -18,16 +18,16 @@ public class ArtifactInteractable : Interactable
     TextMeshProUGUI descTextbox;
 
     Image itemImageUI;
-    [SerializeField] Texture2D itemImageTexture;
+    [SerializeField] Texture2D itemPortrait;
 
 
     [SerializeField] AudioClip narration;
     AudioSource audioSource;
 
 
-    float previousTimescale = 0f;
-
     ParticleSystem particles;
+
+    float previousTimescale = 0f;
 
     
     public override void OnInteraction()
@@ -44,8 +44,8 @@ public class ArtifactInteractable : Interactable
         descTextbox.text = itemDescription; // have text appear.
 
         //itemImageTexture = AssetPreview.GetMiniThumbnail(this.gameObject);
-        itemImageUI.sprite = Sprite.Create(itemImageTexture, 
-                             new Rect(new Vector2(0,0), new Vector2(128, 128)), 
+        itemImageUI.sprite = Sprite.Create(itemPortrait, 
+                             new Rect(new Vector2(0, 0), new Vector2(itemPortrait.width, itemPortrait.height)), 
                              new Vector2(0, 0)); // set image to given object thumbnail
 
 
@@ -78,6 +78,7 @@ public class ArtifactInteractable : Interactable
             transform.DetachChildren();
             //this.gameObject.SetActive(false);
 
+            gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.6f, 0.6f, 0.6f);
 
             interactionActive = false;
             hasBeenChecked = true;
@@ -89,18 +90,21 @@ public class ArtifactInteractable : Interactable
 
     }
 
-    private void Awake()
-    {
+    private void Awake(){
+
         artifactInfoDisplay = GameObject.Find("Artifact Info Display");
-    }
-    private void Start()
-    {
-        //artifactInfoDisplay = GameObject.Find("Artifact Info DIsplay");
-        nameTextbox = artifactInfoDisplay.transform.GetChild(1).GetComponent<TextMeshProUGUI>();  
+        nameTextbox = artifactInfoDisplay.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         descTextbox = artifactInfoDisplay.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         itemImageUI = artifactInfoDisplay.transform.GetChild(3).GetComponent<Image>();
         //nameTextbox = artifactInfoDisplay.GetComponentInChildren<TextMeshProUGUI>();
-        artifactInfoDisplay.SetActive(false);
+
+        base.Awake();
+    }
+
+    private void Start()
+    {
+        if (artifactInfoDisplay.activeInHierarchy)
+            artifactInfoDisplay.SetActive(false);
 
         audioSource = GetComponent<AudioSource>();
         //textbox = GameObject.Find("Item Description Box").GetComponent<TextMeshProUGUI>();

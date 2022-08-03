@@ -14,18 +14,23 @@ public abstract class Interactable : MonoBehaviour
     bool inRange;
     //GameObject playerHUD;
 
-    public Image interactionIcon; 
+    Image interactionIcon;
     //Texture2D interactionIconTexture;
 
 
-    
 
-    protected void Start(){
 
+    protected void Awake()
+    {
         interactionActive = false;
 
         interactionIcon = GameObject.Find("Interaction Icon").GetComponent<Image>();
-        interactionIcon.gameObject.SetActive(false);
+    }
+
+    protected void Start(){
+
+        if(interactionIcon.gameObject.activeInHierarchy)
+            interactionIcon.gameObject.SetActive(false);
 
         //playerHUD = GameObject.Find("HUD");
 

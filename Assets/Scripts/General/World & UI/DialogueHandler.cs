@@ -7,19 +7,19 @@ using TMPro;
 public class DialogueHandler : MonoBehaviour
 {
     
-    static Image textbox;
+    static public GameObject playerHUD { get; private set; }
+    static ThirdPersonController playerController;
+    static public Image textbox { get; private set; }
     static TextMeshProUGUI displayName;
     static TextMeshProUGUI displayText; // make sure these are parented to the obj with the script
 
-    static ThirdPersonController playerController;
-    static public GameObject playerHUD { get; private set; }
+    public static bool dialogueActive {  get; private set; }
 
     static List<string> currentDialogueText = new List<string>(20);
     static List<AudioClip> currentDialogueAudio = new List<AudioClip>(20);
     static AudioSource audioSource;
 
     static int index = -1;
-    public static bool dialogueActive {  get; private set; }
 
 
     static DialogueHandler handler;
@@ -56,6 +56,7 @@ public class DialogueHandler : MonoBehaviour
         {
             DisplayNextLine();
         }
+
     }
 
 
