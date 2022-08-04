@@ -10,7 +10,7 @@ public class Shuriken : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        else if (!other.gameObject.CompareTag("Enemy") && !other.gameObject.CompareTag("Player"))
+        else if (!other.gameObject.CompareTag("Enemy") && !other.gameObject.CompareTag("Cripto"))
         {
             Destroy(gameObject);
         }
