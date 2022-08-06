@@ -8,6 +8,7 @@ public class Detect : EnemyState
     public override void StartState(EnemyManager manager)
     {
         Detectiontimer = manager.WanderDetectionRequired;
+        manager.MyAnimator.SetBool("Moving", false);
     }
 
     public override void UpdateState(EnemyManager manager)

@@ -9,29 +9,27 @@ public class ThrowShuriken : AbilityBase
     {
         Ray ray = Camera.main.ViewportPointToRay(rayOrigin);
 
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
             //main.transform.LookAt((main.CameraObj.transform.position - main.transform.position).normalized);
-            main.transform.rotation = main.CameraObj.transform.rotation;
-        }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            main.CameraObj.GetComponent<CameraController>().distanceFromPlayer = 1;
             main.Crosshair.SetActive(true);
-        }
 
-        if (Input.GetMouseButtonUp(1))
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameObject shureken = GameObject.Instantiate(main.ShurikenObj, new Vector3(main.Player.transform.position.x, 1, main.Player.transform.position.z), Quaternion.identity);
+
+                shureken.GetComponent<Rigidbody>().AddForce((ray.GetPoint(1000) - main.Player.transform.position).normalized * main.ShurikenSpeed);
+            }
+        }
+        else
         {
-            main.CameraObj.GetComponent<CameraController>().distanceFromPlayer = 3;
             main.Crosshair.SetActive(false);
         }
 
-        if (Input.GetMouseButtonDown(0) && Input.GetMouseButton(1))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            GameObject shureken = GameObject.Instantiate(main.ShurikenObj,new Vector3 (main.Player.transform.position.x, 1, main.Player.transform.position.z), Quaternion.identity);
-            
-            shureken.GetComponent<Rigidbody>().AddForce((ray.GetPoint(1000) - main.Player.transform.position).normalized * main.ShurikenSpeed);
+            main.SwitchState(new Teleport());
         }
     }
 }

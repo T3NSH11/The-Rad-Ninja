@@ -22,11 +22,16 @@ public class AbilityMain : MonoBehaviour
         
     void Start()
     {
-        Ability = new ThrowShuriken();
+        Ability = new Teleport();
     }
 
     void Update()
     {
         Ability.Activation(this);
+    }
+
+    public void SwitchState(AbilityBase NewAbility)
+    {
+        Ability = NewAbility;
     }
 }
