@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Yousef's Scenes/Tutorial.unity
     guid: c4db8dbbecf7f2c44bf558fe94c73c93
+  - enabled: 1
+    path: Assets/Scenes/Yousef's Scenes/Map 2.unity
+    guid: 68300bd51a11ff246a32781d69dbfcd6
   m_configObjects: {}
