@@ -5,19 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
-    Scene scene;
-    // Start is called before the first frame update
-    void Start()
+   void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.K))
-        {
-            SceneManager.LoadScene("Map 2");
-        }
+        SceneManager.LoadScene(2);
     }
 }
