@@ -73,15 +73,16 @@ public class ArtifactInteractable : Interactable
             artifactInfoDisplay.SetActive(false);
             DialogueHandler.playerHUD.SetActive(true);
             
-            particles.Play();
+            //particles.Play();
             //particles.Emit(50);
-            transform.DetachChildren();
+            //transform.DetachChildren();
             //this.gameObject.SetActive(false);
 
             gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.6f, 0.6f, 0.6f);
 
             interactionActive = false;
-            hasBeenChecked = true;
+            interactionIcon.gameObject.SetActive(true);
+            //hasBeenChecked = true;
 
             yield break; // exit waiiting loop
         }
@@ -109,8 +110,8 @@ public class ArtifactInteractable : Interactable
         audioSource = GetComponent<AudioSource>();
         //textbox = GameObject.Find("Item Description Box").GetComponent<TextMeshProUGUI>();
 
-        particles = transform.GetChild(0).GetComponent<ParticleSystem>();
-        particles.Stop();
+        //particles = transform.GetChild(0).GetComponent<ParticleSystem>();
+        //particles.Stop();
 
         base.Start();
     }

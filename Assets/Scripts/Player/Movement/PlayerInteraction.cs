@@ -23,11 +23,11 @@ public class PlayerInteraction : MonoBehaviour
                 interactableToCheck = hit.collider.gameObject.GetComponent<Interactable>(); // 
 
                 if (currentInteractable == interactableToCheck)
-                    currentInteractable.InRange();
+                    currentInteractable.EnterRange();
                 
                 else // make sure our current loaded interactable is out of range before putting the new found interactable in range
                 {
-                    currentInteractable.OutOfRange(); 
+                    currentInteractable.ExitRange(); 
                     currentInteractable = interactableToCheck;
                 }
 

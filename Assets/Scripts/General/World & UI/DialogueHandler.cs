@@ -35,7 +35,7 @@ public class DialogueHandler : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        panel = gameObject.GetComponentInChildren<Image>();
+        textbox = gameObject.GetComponentInChildren<Image>();
         displayText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
 
@@ -44,7 +44,7 @@ public class DialogueHandler : MonoBehaviour
 
 
         displayText.text = "";
-        panel.gameObject.SetActive(false);
+        textbox.gameObject.SetActive(false);
         dialogueActive = false;
 
     }
