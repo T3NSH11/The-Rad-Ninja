@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
     Vector3 collisionSmoothing;
     [SerializeField] float movementSpeed = 0.11f; // used for the Lerp in camera movement.
 
-    [SerializeField] float rotationSpeed = .17f; // for Lerp in rotation.
+    [SerializeField] float rotationSpeed = 0.34f; // for Lerp in rotation.
 
 
     
@@ -74,6 +74,13 @@ public class CameraController : MonoBehaviour
             horizontalInput = -player.forward.x;
             verticalInput = -player.forward.y;
         }*/
+
+        /*
+        if (PauseMenu.isPaused)
+            Cursor.visible = true;
+        else
+            Cursor.visible = false;
+        */
 
     }
 
