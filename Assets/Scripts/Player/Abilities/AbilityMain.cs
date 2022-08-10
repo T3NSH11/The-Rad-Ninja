@@ -22,7 +22,7 @@ public class AbilityMain : MonoBehaviour
         
     void Start()
     {
-        Ability = new ThrowShuriken();
+        Ability = new Teleport();
     }
 
     void Update()

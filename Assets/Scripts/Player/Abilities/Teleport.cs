@@ -22,6 +22,7 @@ public class Teleport : AbilityBase
         {
             main.TeleportMarker.SetActive(true);
             main.TeleportMarker.GetComponent<ParticleSystem>().Play();
+            main.gameObject.GetComponent<ThirdPersonController>().enabled = false;
         }
 
         // when right mouse button is released camera zoom is set to default and teleport marker particle effect is stopped. particle effect remains playing if player is in the process of teleporting.
@@ -31,6 +32,7 @@ public class Teleport : AbilityBase
             {
                 main.TeleportMarker.SetActive(true);
                 main.TeleportMarker.GetComponent<ParticleSystem>().Stop();
+                main.gameObject.GetComponent<ThirdPersonController>().enabled = true;
             }
 
             //main.CameraObj.GetComponent<CameraController>().distance = 7;
@@ -91,7 +93,7 @@ public class Teleport : AbilityBase
         //    main.Player.transform.position = Vector3.MoveTowards(main.Player.transform.position, main.TeleportMarker.transform.position, main.TeleportSpeed * Time.deltaTime);
         //}
         // when player is closer that 0.2 units away from the destination TP is set to false, player collider and renderer is enabled, marker particle effect is stopped, and camera zoom is set to default.
-        if (Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position) < 0.2)
+        if (Vector3.Distance(main.Player.transform.position, main.TeleportMarker.transform.position) < 0.5)
         {
             TP = false;
             main.SmokeTrail.GetComponent<ParticleSystem>().Stop();
