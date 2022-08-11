@@ -7,19 +7,19 @@ using TMPro;
 public class DialogueHandler : MonoBehaviour
 {
     
-    static Image panel;
+    static public GameObject playerHUD { get; private set; }
+    static ThirdPersonController playerController;
+    static public Image textbox { get; private set; }
     static TextMeshProUGUI displayName;
     static TextMeshProUGUI displayText; // make sure these are parented to the obj with the script
 
-    static ThirdPersonController playerController;
-    static GameObject playerHUD;
+    public static bool dialogueActive {  get; private set; }
 
     static List<string> currentDialogueText = new List<string>(20);
     static List<AudioClip> currentDialogueAudio = new List<AudioClip>(20);
     static AudioSource audioSource;
 
     static int index = -1;
-    public static bool dialogueActive {  get; private set; }
 
 
     static DialogueHandler handler;
@@ -35,7 +35,7 @@ public class DialogueHandler : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        panel = gameObject.GetComponentInChildren<Image>();
+        textbox = gameObject.GetComponentInChildren<Image>();
         displayText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
 
@@ -44,7 +44,7 @@ public class DialogueHandler : MonoBehaviour
 
 
         displayText.text = "";
-        panel.gameObject.SetActive(false);
+        textbox.gameObject.SetActive(false);
         dialogueActive = false;
 
     }
@@ -67,7 +67,7 @@ public class DialogueHandler : MonoBehaviour
         playerHUD.SetActive(false);
 
         // make textbox appear
-        panel.gameObject.SetActive(true);
+        textbox.gameObject.SetActive(true);
 
 
         currentDialogueText.Clear();
@@ -93,13 +93,10 @@ public class DialogueHandler : MonoBehaviour
             playerHUD.SetActive(true);
 
             displayText.text = "";
-            panel.gameObject.SetActive(false);
-            Debug.Log("kasodksaod");
+            textbox.gameObject.SetActive(false);
 
             return;
         }
-
-
 
 
         displayText.text = currentDialogueText[index]; // display text in the list at current index.

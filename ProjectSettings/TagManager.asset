@@ -7,8 +7,8 @@ TagManager:
   - Grid
   - Obstacle
   - Enemy
-  - Cripto
-  - Sphere
+  - Interactable
+  - Light
   layers:
   - Default
   - TransparentFX
