@@ -11,13 +11,7 @@ public class Pathfinder
     public bool PathFollowed;
     public Node OriginNode;
     public Node TargetNode;
-    _Grid Grid;
-
-    public void initPathFinder()
-    {
-        Grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<_Grid>();
-        Grid.PathFinder = this;
-    }
+    public _Grid Grid;
 
     public Stack<Vector3> FindPath(Vector3 Origin, Vector3 Target)
     {

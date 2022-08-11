@@ -63,12 +63,6 @@ public class EnemyManager : MonoBehaviour
     public Animator MyAnimator;
     #endregion
     #endregion
-
-
-    private void Awake()
-    {
-        Pathfinder.initPathFinder();
-    }
     void Start()
     {
         #region State assignments
