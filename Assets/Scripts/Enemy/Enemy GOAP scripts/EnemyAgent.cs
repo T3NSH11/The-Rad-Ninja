@@ -21,7 +21,7 @@ public class EnemyAgent : MonoBehaviour
     public List<EnemyAction> actions = new List<EnemyAction>();
     public Dictionary<SubGoal, int > goals = new Dictionary<SubGoal, int>();
 
-    Planner planner;
+    //Planner planner;
     Queue<EnemyAction> ActionQueue;
     public EnemyAction CurrentAction;
     SubGoal CurrentSubGoal;

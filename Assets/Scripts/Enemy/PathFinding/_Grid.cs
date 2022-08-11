@@ -23,7 +23,10 @@ public class _Grid : MonoBehaviour
         Nodes = new Node[NodeCount];
         NodeWorldPositionsx = new float[NodeCount];
         NodeWorldPositionsz = new float[NodeCount];
+    }
 
+    private void Start()
+    {
         SetNodes();
     }
 
@@ -80,6 +83,7 @@ public class _Grid : MonoBehaviour
                 GameObject collider = Instantiate(SphereCollider, Nodes[i].WorldPosition, Quaternion.identity, SphereColliderContainer.transform);
                 collider.GetComponent<SphereCollider>().radius = CellSize/2;
                 collider.GetComponent<Collisiondetection>().node = Nodes[i];
+                collider.GetComponent<Collisiondetection>().pathfinder = PathFinder;
                 ColCount++;
                 i++;
             }

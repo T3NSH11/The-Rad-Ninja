@@ -23,10 +23,10 @@ public class Attack : EnemyState
         else
             manager.Attackcooldown -= Time.deltaTime;
 
-        if(!manager.FOV.PlayerDetected)
-        {
-            manager.SwitchState(manager.SearchForPlayer);
-        }
+        //if(!manager.FOV.PlayerDetected)
+        //{
+        //    manager.SwitchState(manager.SearchForPlayer);
+        //}
 
         if(Vector3.Distance(manager.transform.position, manager.Player.transform.position) > manager.AttackRange)
         {

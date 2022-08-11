@@ -9,18 +9,25 @@ public class Pathfinder
 {
     bool NodesAdded = false;
     public bool PathFollowed;
+    public Node OriginNode;
+    public Node TargetNode;
+    _Grid Grid;
+
+    public void initPathFinder()
+    {
+        Grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<_Grid>();
+        Grid.PathFinder = this;
+    }
+
     public Stack<Vector3> FindPath(Vector3 Origin, Vector3 Target)
     {
         Stack<Vector3> Path = new Stack<Vector3>();
-        _Grid Grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<_Grid>();
         List<Node> NodesNotVisited = new List<Node>();
         List<Node> NodesVisited = new List<Node>();
         List<Node> NodesCalculated = new List<Node>();
 
         ResetNodes(Grid);
 
-        Node OriginNode = GetNodeFromWorldPosition(Origin, Grid);
-        Node TargetNode = GetNodeFromWorldPosition(Target, Grid);
         Node CurrentNode = OriginNode;
 
         if (NodesAdded == false)
