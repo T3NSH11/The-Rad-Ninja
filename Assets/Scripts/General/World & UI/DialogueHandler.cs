@@ -45,7 +45,7 @@ public class DialogueHandler : MonoBehaviour
         portraitBox = textboxObj.transform.GetChild(1).gameObject.GetComponent<Image>();
 
 
-        playerController = GameObject.Find("Player").GetComponent<ThirdPersonController>();
+        playerController = GameObject.Find("Cripto").GetComponent<ThirdPersonController>();
         playerHUD = GameObject.Find("HUD");
 
 
@@ -63,7 +63,6 @@ public class DialogueHandler : MonoBehaviour
             DisplayNextLine();
             //Debug.Log(dialogueActive);
         }
-
     }
 
 

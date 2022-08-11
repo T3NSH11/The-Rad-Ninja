@@ -21,13 +21,13 @@ public class DialogueInput : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Cripto"))
             inRange = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Cripto"))
             inRange = false;
     }
 }

@@ -8,6 +8,7 @@ public class AbilityMain : MonoBehaviour
     public float ShurikenSpeed;
     public float TeleportSpeed;
     public GameObject TeleportMarker;
+    public GameObject SmokeTrail;
     public GameObject Player;
     public GameObject ShurikenObj;
     public GameObject CameraObj;
@@ -16,6 +17,7 @@ public class AbilityMain : MonoBehaviour
     public Animator PlayerAnim;
     public LayerMask GroundLayer;
     public LayerMask Climbable;
+    public LayerMask ObstacleLayer;
     AbilityBase Ability;
         
     void Start()
@@ -26,5 +28,10 @@ public class AbilityMain : MonoBehaviour
     void Update()
     {
         Ability.Activation(this);
+    }
+
+    public void SwitchState(AbilityBase NewAbility)
+    {
+        Ability = NewAbility;
     }
 }

@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenu;
 
-    public static bool isPaused;
+    public bool isPaused;
     void Start()
     {
         pauseMenu.SetActive(false);
@@ -41,12 +41,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true); 
         Time.timeScale = 0f;
         isPaused = true;
-
-        DialogueHandler.playerHUD.SetActive(false);
-        if (DialogueHandler.dialogueActive)
-            DialogueHandler.textbox.gameObject.SetActive(false);
-        
-
     }
     
     public void ResumeGame()
@@ -54,11 +48,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-
-        if (DialogueHandler.dialogueActive)
-            DialogueHandler.playerHUD.SetActive(true);
-        else
-            DialogueHandler.playerHUD.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void GoToMainMenu()

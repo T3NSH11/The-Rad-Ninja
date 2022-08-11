@@ -14,7 +14,7 @@ public abstract class Interactable : MonoBehaviour
     bool inRange;
     //GameObject playerHUD;
 
-    Image interactionIcon;
+    protected Image interactionIcon;
     //Texture2D interactionIconTexture;
 
 
@@ -38,7 +38,7 @@ public abstract class Interactable : MonoBehaviour
 
     void Update(){
 
-        if (inRange && !interactionActive && !hasBeenChecked && Input.GetKeyDown(interactionKey))
+        if (inRange && !interactionActive && Input.GetKeyDown(interactionKey))
         {
             // play the "interacting" animation
             InteractionEvent();
@@ -79,7 +79,7 @@ public abstract class Interactable : MonoBehaviour
     
     private void OnTriggerEnter(Collider other){
 
-        if (other.CompareTag("Player") && !hasBeenChecked)
+        if (other.CompareTag("Cripto") && !hasBeenChecked)
         {
             // highlight gameobject
             // display interactable icon on canvas
@@ -89,7 +89,7 @@ public abstract class Interactable : MonoBehaviour
 
     private void OnTriggerExit(Collider other){
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Cripto"))
         {
             // dehighlight gameobject
             // remove interactable icon from canvas
