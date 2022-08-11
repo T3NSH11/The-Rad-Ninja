@@ -11,12 +11,12 @@ public class PlayerVisibilityController : MonoBehaviour
     float currentTotalDistance = 0f;
     float currentDistance = 0f;
 
-    [SerializeField] float distanceDivideBy = 2f;
+    [SerializeField] float distanceReduction = 2f;
 
-    [SerializeField] float intensity = 1.8f; // higher values mean the player will be more visible at their distance from the nearest lightsource.
-    [SerializeField] float obstructionMultiplier = 2.88f;
+    [SerializeField] float intensity = 4.25f; // higher values mean the player will be more visible at their distance from the nearest lightsource.
+    [SerializeField] float obstructionMultiplier = 1.6f;
     [SerializeField] float maxDistance = 30f; // maximum distance a light can be 
-    public float lerpTime;
+    public float lerpTime = 0.06f;
 
     GameObject closestLight; 
     GameObject[] lightsources;
@@ -27,13 +27,13 @@ public class PlayerVisibilityController : MonoBehaviour
     void Start()
     {
         lightsources = GameObject.FindGameObjectsWithTag("Light"); // get references to all lights in scene
-        visLevelSlider.minValue = 0f;
-        visLevelSlider.maxValue = 100f;
+        visLevelSlider.minValue = -100f;
+        visLevelSlider.maxValue = 0f;
     }
 
     void Update()
     {
-        currentDistance = Mathf.Infinity;
+        //currentDistance = Mathf.Infinity;
         currentTotalDistance = 0f;
 
         // compare each light's distance to the current closest light
@@ -50,10 +50,12 @@ public class PlayerVisibilityController : MonoBehaviour
             //else
                 //currentDistance = Mathf.Infinity;
             */
-
-            currentTotalDistance += GetLightDistance(lightsources[i]) / distanceDivideBy;
+            
+            currentTotalDistance += GetLightDistance(lightsources[i]) / distanceReduction;
 
         }
+
+        //currentTotalDistance /= lightsources.Length;
 
         Debug.Log(currentTotalDistance);
 
@@ -70,7 +72,7 @@ public class PlayerVisibilityController : MonoBehaviour
         visibility = Mathf.Lerp(visibility, currentTotalDistance * intensity, lerpTime);
 
 
-        visLevelSlider.value = visibility; // the lower the value, the more visible.
+        visLevelSlider.value = -visibility; // the lower the value, the more visible.
 
 
         //Debug.Log($"closest light: {closestLight.name}\ndistance: {currentDistance}");
@@ -85,7 +87,7 @@ public class PlayerVisibilityController : MonoBehaviour
             ray = new Ray(transform.position, light.transform.position - transform.position);
 
             if (Physics.Raycast(ray, out hit, dist))
-                dist *= obstructionMultiplier;
+                dist /= obstructionMultiplier;
 
 
             return dist;
