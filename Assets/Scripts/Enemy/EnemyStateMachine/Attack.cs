@@ -12,7 +12,7 @@ public class Attack : EnemyState
 
     public override void UpdateState(EnemyManager manager)
     {
-        //manager.transform.LookAt(manager.Player.transform.position);
+        manager.transform.LookAt(new Vector3(manager.Player.transform.position.x, manager.transform.position.y, manager.Player.transform.position.z));
         if (manager.Attackcooldown <= 0)
         {
             manager.MyAnimator.SetBool("Moving", false);

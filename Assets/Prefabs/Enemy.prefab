@@ -202,7 +202,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5782344376741114641, guid: d7ba52e3aa507074296c1dd2b4414924, type: 3}
+  - {fileID: 2100000, guid: 841b0b6139d29a54791fa71823f8900e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1134,6 +1134,8 @@ GameObject:
   - component: {fileID: 5018803646168216977}
   - component: {fileID: 5401334380647740830}
   - component: {fileID: 5018803645860592895}
+  - component: {fileID: 1966440801}
+  - component: {fileID: 1966440800}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1204,7 +1206,7 @@ MonoBehaviour:
   PathNodes: []
   currentPath_NodeID: 0
   current_SetPath: {fileID: 0}
-  AttackRange: 1
+  AttackRange: 1.5
   AttackDamage: 30
   Attackcooldown: 0
   AnimationBlendSpeed: 1
@@ -1233,6 +1235,36 @@ MonoBehaviour:
   PlayerDetected: 0
   directionToPlayer: {x: 0, y: 0, z: 0}
   PlayerTransform: {fileID: 0}
+--- !u!54 &1966440801
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5289256222217177286}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!136 &1966440800
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5289256222217177286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.19655466
+  m_Height: 1.8016287
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9245445, z: 0.03599739}
 --- !u!1 &5378247726819863453
 GameObject:
   m_ObjectHideFlags: 0
