@@ -14,7 +14,7 @@ public class DialogueInput : MonoBehaviour
 
     void Update(){
 
-        if (inRange && !DialogueHandler.dialogueActive && Input.GetKeyDown(KeyCode.E))
+        if (inRange && !DialogueHandler.dialogueActive && Input.GetKeyDown(KeyCode.Space))
         {
             DialogueHandler.StartDialogueDisplay(dialogue, dialogueAudio);
         }
