@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Interactable
   - Light
+  - Cripto
   layers:
   - Default
   - TransparentFX
