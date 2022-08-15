@@ -13,6 +13,11 @@ public class DialogueHandler : MonoBehaviour
     static TextMeshProUGUI displayName;
     static TextMeshProUGUI displayText; // make sure these are parented to the obj with the script
 
+    static Image portraitBox;
+    [SerializeField] Texture2D criptoPortrait;
+    [SerializeField] Texture2D annaPortrait;
+    [SerializeField] Texture2D mustafaPortrait;
+
     public static bool dialogueActive {  get; private set; }
 
     static List<string> currentDialogueText = new List<string>(20);
@@ -32,11 +37,12 @@ public class DialogueHandler : MonoBehaviour
         else
             Destroy(this);
 
-
         audioSource = GetComponent<AudioSource>();
 
-        textbox = gameObject.GetComponentInChildren<Image>();
-        displayText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        GameObject textboxObj = transform.GetChild(0).gameObject;
+        textbox = textboxObj.GetComponent<Image>();
+        displayText = textboxObj.GetComponentInChildren<TextMeshProUGUI>();
+        portraitBox = textboxObj.transform.GetChild(1).gameObject.GetComponent<Image>();
 
 
         playerController = GameObject.Find("Cripto").GetComponent<ThirdPersonController>();
@@ -55,6 +61,7 @@ public class DialogueHandler : MonoBehaviour
         if (dialogueActive && Input.GetKeyDown(KeyCode.Space))
         {
             DisplayNextLine();
+            //Debug.Log(dialogueActive);
         }
     }
 
@@ -81,10 +88,11 @@ public class DialogueHandler : MonoBehaviour
 
     }
 
-    static void DisplayNextLine(){
+    void DisplayNextLine() {
 
 
         index++;
+        //audioSource.Stop();
 
         if (index >= currentDialogueText.Count) // if list is empty, resume game
         {
@@ -95,11 +103,41 @@ public class DialogueHandler : MonoBehaviour
             displayText.text = "";
             textbox.gameObject.SetActive(false);
 
+
             return;
         }
+        else
+        {
+
+            if (currentDialogueText[index].StartsWith("[CRIPTO]"))
+            {
+                currentDialogueText[index] = currentDialogueText[index].Remove(0, 8);
+                portraitBox.sprite = Sprite.Create(criptoPortrait,
+                                                   new Rect(new Vector2(0, 0), 
+                                                   new Vector2(criptoPortrait.width, criptoPortrait.height)),
+                                                   new Vector2(0, 0)); // set image to given object thumbnail
+            }
+            if (currentDialogueText[index].StartsWith("[ANNA]"))
+            {
+                currentDialogueText[index] = currentDialogueText[index].Remove(0, 6);
+                portraitBox.sprite = Sprite.Create(annaPortrait,
+                                                   new Rect(new Vector2(0, 0),
+                                                   new Vector2(annaPortrait.width, annaPortrait.height)),
+                                                   new Vector2(0, 0));
+            }
+            if (currentDialogueText[index].StartsWith("[MUSTAFA]"))
+            {
+                currentDialogueText[index] = currentDialogueText[index].Remove(0, 9);
+                portraitBox.sprite = Sprite.Create(mustafaPortrait,
+                                                   new Rect(new Vector2(0, 0),
+                                                   new Vector2(mustafaPortrait.width, mustafaPortrait.height)),
+                                                   new Vector2(0, 0));
+            }
 
 
-        displayText.text = currentDialogueText[index]; // display text in the list at current index.
+            displayText.text = currentDialogueText[index]; // display text in the list at current index.
+
+        }
 
         //audioSource.clip = currentDialogueAudio[index];
         //audioSource.Play();
