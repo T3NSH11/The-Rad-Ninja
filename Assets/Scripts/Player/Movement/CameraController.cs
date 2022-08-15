@@ -217,10 +217,9 @@ public class CameraController : MonoBehaviour
 
             Ray ray = new Ray(fromPosition, clipPoints[i] - fromPosition);
             float distance = Vector3.Distance(clipPoints[i], fromPosition);
-            RaycastHit hit;
 
 
-            if (Physics.Raycast(ray, out hit, distance) && !hit.collider.CompareTag("Cripto"))
+            if (Physics.Raycast(ray, distance))
                 return true;
 
         }
