@@ -63,7 +63,6 @@ public class EnemyManager : MonoBehaviour
     public Animator MyAnimator;
     #endregion
     #endregion
-
     void Start()
     {
         #region State assignments
@@ -75,7 +74,7 @@ public class EnemyManager : MonoBehaviour
         Attack = new Attack();
         Detect = new Detect();
         FollowPath = new FollowPath();
-        CurrentState = ChasePlayer;
+        CurrentState = Wander;
         #endregion
 
         MyAnimator = GetComponent<Animator>();
