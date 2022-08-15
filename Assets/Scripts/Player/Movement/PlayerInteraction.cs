@@ -16,7 +16,7 @@ public class PlayerInteraction : MonoBehaviour
 
         interactionCheckRay = new Ray(transform.position, transform.forward * checkDistance);
 
-        if (Physics.Raycast(interactionCheckRay, out hit, checkDistance) && !Interactable.interactionActive)
+        if (Physics.Raycast(interactionCheckRay, out hit, checkDistance))// && !Interactable.interactionActive)
         {
             if (hit.collider.CompareTag("Interactable"))
             {
@@ -34,6 +34,31 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnTriggerStay(Collider obj)
+    {
+        interactableToCheck = obj.GetComponent<Interactable>();
+
+        if (Vector3.Distance(gameObject.transform.position, currentInteractable.gameObject.transform.position)
+                > Vector3.Distance(gameObject.transform.position, obj.gameObject.transform.position) 
+                || currentInteractable == null)
+        {
+            currentInteractable.ExitRange();
+            currentInteractable = interactableToCheck;
+            currentInteractable.EnterRange();
+        }
+    }
+
+    private void OnTriggerExit(Collider obj)
+    {
+        if (obj.CompareTag("Interactable"))
+        {
+            if (obj.GetComponent<Interactable>() == currentInteractable)
+            {
+                currentInteractable.ExitRange();
+            }
+        }
     }
 
     private void OnDrawGizmos(){
