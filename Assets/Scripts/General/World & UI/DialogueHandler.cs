@@ -42,7 +42,7 @@ public class DialogueHandler : MonoBehaviour
         GameObject textboxObj = transform.GetChild(0).gameObject;
         textbox = textboxObj.GetComponent<Image>();
         displayText = textboxObj.GetComponentInChildren<TextMeshProUGUI>();
-       // portraitBox = textboxObj.transform.GetChild(1).gameObject.GetComponent<Image>();
+        portraitBox = textboxObj.transform.GetChild(1).gameObject.GetComponent<Image>();
 
 
         playerController = GameObject.Find("Cripto").GetComponent<ThirdPersonController>();
