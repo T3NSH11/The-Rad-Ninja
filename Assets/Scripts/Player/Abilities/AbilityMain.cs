@@ -19,6 +19,8 @@ public class AbilityMain : MonoBehaviour
     public LayerMask Climbable;
     public LayerMask ObstacleLayer;
     AbilityBase Ability;
+    public AudioSource source;
+    public AudioClip clip;
         
     void Start()
     {
