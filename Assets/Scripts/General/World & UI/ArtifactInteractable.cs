@@ -21,8 +21,10 @@ public class ArtifactInteractable : Interactable
     [SerializeField] Texture2D itemPortrait;
 
 
-    [SerializeField] AudioClip narration;
+    public AudioClip narration;
     AudioSource audioSource;
+    public AudioSource source;
+    public AudioClip clip;
 
 
     ParticleSystem particles;
@@ -34,7 +36,7 @@ public class ArtifactInteractable : Interactable
     {
         audioSource.clip = narration;
         audioSource.Play();
-
+        source.PlayOneShot(clip);
 
         previousTimescale = Time.timeScale;
         Time.timeScale = 0f; // pause game
