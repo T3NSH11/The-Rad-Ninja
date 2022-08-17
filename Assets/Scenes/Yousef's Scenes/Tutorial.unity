@@ -241,7 +241,9 @@ MonoBehaviour:
   itemDescription: The horizon captured eloquently in the form of a painting by Sebastian
     Lenglet.
   itemPortrait: {fileID: 2800000, guid: bfb9be647fc2efd4690dadbb2384b951, type: 3}
-  narration: {fileID: 8300000, guid: 17e2052cde453ba4ab6d8e651e7afe14, type: 3}
+  narration: {fileID: 8300000, guid: 424aae011d5f6054e9203dfea1e94dc5, type: 3}
+  source: {fileID: 3577705}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &3577708
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3734,7 +3736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 1391895955}
-  mouseSensitivity: 16.3
+  mouseSensitivity: 3.5
   minYRotation: -30
   maxYRotation: 60
   distanceFromPlayer: 3.1
@@ -7174,6 +7176,8 @@ MonoBehaviour:
     story
   itemPortrait: {fileID: 2800000, guid: e306214ac98b99d41b412ee6e6f48676, type: 3}
   narration: {fileID: 8300000, guid: b0f6fe81d2d45d14681a65684d7d8de2, type: 3}
+  source: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!23 &251100623
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8192,6 +8196,8 @@ MonoBehaviour:
     artist, Dimitri Volkanov. '
   itemPortrait: {fileID: 2800000, guid: 046b7710a3561354c89a323f30532117, type: 3}
   narration: {fileID: 8300000, guid: b3c910f51ede8b64cbcc906086e7c878, type: 3}
+  source: {fileID: 278921311}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &278921314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17932,6 +17938,8 @@ MonoBehaviour:
   itemDescription: The horizon dawning on the universe, circa 1940.
   itemPortrait: {fileID: 2800000, guid: 5f76025ceafaa1845989056d38309144, type: 3}
   narration: {fileID: 8300000, guid: d2ab9d918d9babc46a26ad2ea31a37d3, type: 3}
+  source: {fileID: 766796608}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &766796611
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21138,6 +21146,8 @@ MonoBehaviour:
   itemDescription: Picasso's artwork of his beloved granddaughter, Marina.
   itemPortrait: {fileID: 2800000, guid: c8918b493e0da2a458f3487efa9e57f4, type: 3}
   narration: {fileID: 8300000, guid: deaece889354ee1438bcab4f7b752524, type: 3}
+  source: {fileID: 897749779}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &897749782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21671,6 +21681,8 @@ MonoBehaviour:
     the largest group of images of any woman in his life."
   itemPortrait: {fileID: 2800000, guid: d84e38906e642484abbcb68f66071fe6, type: 3}
   narration: {fileID: 8300000, guid: 72068ace20e832b49b0bfdb74b44e33e, type: 3}
+  source: {fileID: 927200257}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!82 &927200257
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23644,8 +23656,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010154328}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.06, y: 2.068, z: 0.13}
-  m_LocalScale: {x: 0.33512494, y: 0.33512494, z: 0.33512494}
+  m_LocalPosition: {x: -0.06, y: 2.152, z: 0.13}
+  m_LocalScale: {x: 0.47922865, y: 0.47922865, z: 0.47922865}
   m_Children: []
   m_Father: {fileID: 321217498}
   m_RootOrder: 8
@@ -24240,6 +24252,8 @@ MonoBehaviour:
     In addition to being one of the most famous paintings, it is also the most valuable
   itemPortrait: {fileID: 2800000, guid: 4030146e98a17a84883064cfa616e758, type: 3}
   narration: {fileID: 8300000, guid: 4b5993fefa2cdd34c81c03de953af805, type: 3}
+  source: {fileID: 1031077175}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &1031077178
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26240,6 +26254,8 @@ MonoBehaviour:
   itemDescription: 'Your own Mona Lisa painting for $15.99 '
   itemPortrait: {fileID: 2800000, guid: 4030146e98a17a84883064cfa616e758, type: 3}
   narration: {fileID: 8300000, guid: 08201780d82f629448d2a7739d4edd54, type: 3}
+  source: {fileID: 1124480424}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &1124480427
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31896,6 +31912,8 @@ MonoBehaviour:
     It provides contemporary art explanation that determines our life and our future."
   itemPortrait: {fileID: 2800000, guid: b5d7349217171394badec8da6f46f3ff, type: 3}
   narration: {fileID: 8300000, guid: 61ca190367be69e45b0764ad3a0842e6, type: 3}
+  source: {fileID: 1415556181}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &1415556184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32829,7 +32847,9 @@ MonoBehaviour:
   itemName: Youssef
   itemDescription: Youssef as a female.
   itemPortrait: {fileID: 2800000, guid: d84e38906e642484abbcb68f66071fe6, type: 3}
-  narration: {fileID: 0}
+  narration: {fileID: 8300000, guid: 17e2052cde453ba4ab6d8e651e7afe14, type: 3}
+  source: {fileID: 1449835788}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &1449835791
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36054,6 +36074,8 @@ MonoBehaviour:
     in 1910.
   itemPortrait: {fileID: 2800000, guid: afbedf68f7438f04a8287e7d27dc7579, type: 3}
   narration: {fileID: 8300000, guid: 188d04bf379a1b044b1081062ab148ce, type: 3}
+  source: {fileID: 1609676398}
+  clip: {fileID: 8300000, guid: 9fe7662ea7797b248afbafef644c66d4, type: 3}
 --- !u!65 &1609676401
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48076,6 +48098,8 @@ MonoBehaviour:
     battle will bestoy protection upon them
   itemPortrait: {fileID: 2800000, guid: 06845435c83e75541b33aed627fe068a, type: 3}
   narration: {fileID: 8300000, guid: fef534d5a24daea45830354db325f264, type: 3}
+  source: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!23 &2074606394
 MeshRenderer:
   m_ObjectHideFlags: 0
