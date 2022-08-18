@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
 
     public GameObject pauseMenu;
+    public GameObject HUD;
 
     public bool isPaused;
     void Start()
@@ -23,12 +24,14 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
                 Cursor.lockState = CursorLockMode.Confined;
+                HUD.SetActive(false);
 
             }
             else
             {
                 ResumeGame();
                 Cursor.lockState = CursorLockMode.Locked;
+                HUD.SetActive(true);
 
 
 
