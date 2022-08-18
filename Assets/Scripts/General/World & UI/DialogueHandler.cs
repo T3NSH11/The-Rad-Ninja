@@ -17,6 +17,7 @@ public class DialogueHandler : MonoBehaviour
     [SerializeField] Texture2D criptoPortrait;
     [SerializeField] Texture2D annaPortrait;
     [SerializeField] Texture2D mustafaPortrait;
+    [SerializeField] Texture2D zeusPortrait;
 
     public static bool dialogueActive {  get; private set; }
 
@@ -131,6 +132,14 @@ public class DialogueHandler : MonoBehaviour
                 portraitBox.sprite = Sprite.Create(mustafaPortrait,
                                                    new Rect(new Vector2(0, 0),
                                                    new Vector2(mustafaPortrait.width, mustafaPortrait.height)),
+                                                   new Vector2(0, 0));
+            }
+            if (currentDialogueText[index].StartsWith("[ZEUS]"))
+            {
+                currentDialogueText[index] = currentDialogueText[index].Remove(0, 9);
+                portraitBox.sprite = Sprite.Create(zeusPortrait,
+                                                   new Rect(new Vector2(0, 0),
+                                                   new Vector2(zeusPortrait.width, zeusPortrait.height)),
                                                    new Vector2(0, 0));
             }
 
