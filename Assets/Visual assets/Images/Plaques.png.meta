@@ -1,0 +1,301 @@
+fileFormatVersion: 2
+guid: 2f84044052fcfde47b6d88f39f88c7d4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5168784683918293480
+    second: Plaques_0
+  - first:
+      213: 1817985164131046376
+    second: Plaques_1
+  - first:
+      213: 6330622680438097568
+    second: Plaques_2
+  - first:
+      213: 8598562799176644881
+    second: Plaques_3
+  - first:
+      213: -5937721014226875323
+    second: Plaques_4
+  - first:
+      213: 8140351911309330486
+    second: Plaques_5
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 2, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Plaques_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 873
+        width: 965
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e9fd6dd8463bb740800000000000000
+      internalID: 5168784683918293480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaques_1
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 689
+        width: 901
+        height: 637
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e316faefd7ca3910800000000000000
+      internalID: 1817985164131046376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaques_2
+      rect:
+        serializedVersion: 2
+        x: 2191
+        y: 848
+        width: 1061
+        height: 478
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a64b8a69c3ead750800000000000000
+      internalID: 6330622680438097568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaques_3
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 34
+        width: 930
+        height: 414
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 119ffc70f4b345770800000000000000
+      internalID: 8598562799176644881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaques_4
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 0
+        width: 1177
+        height: 402
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54c82ab623af89da0800000000000000
+      internalID: -5937721014226875323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaques_5
+      rect:
+        serializedVersion: 2
+        x: 2333
+        y: 0
+        width: 778
+        height: 484
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 638c3441fe658f070800000000000000
+      internalID: 8140351911309330486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: 962.2617, y: -177.06467}
+      - {x: 705.02344, y: -277.11017}
+      - {x: 705.02344, y: -574.0707}
+      - {x: 817.7637, y: -663}
+      - {x: 1321.125, y: -663}
+      - {x: 1487.8535, y: -621.71136}
+      - {x: 1487.8535, y: -253.28983}
+      - {x: 1184.5664, y: -177.06467}
+    - - {x: -1510.084, y: -212.0012}
+      - {x: -1611.709, y: -231.0575}
+      - {x: -1611.709, y: -599.47906}
+      - {x: -1486.2656, y: -631.2395}
+      - {x: -708.1992, y: -631.2395}
+      - {x: -676.4414, y: -542.3102}
+      - {x: -676.4414, y: -294.57846}
+      - {x: -724.0781, y: -212.0012}
+    - - {x: -476.3672, y: -258.0539}
+      - {x: -589.1074, y: -292.99042}
+      - {x: -589.1074, y: -524.8419}
+      - {x: -547.82227, y: -561.36646}
+      - {x: -412.85156, y: -585.1868}
+      - {x: 363.62695, y: -585.1868}
+      - {x: 593.8711, y: -556.6024}
+      - {x: 593.8711, y: -302.51855}
+      - {x: 504.94922, y: -258.0539}
+    - - {x: -452.54883, y: 663}
+      - {x: -477.95508, y: 577.2467}
+      - {x: -477.95508, y: 23.026348}
+      - {x: 428.73047, y: 23.026348}
+      - {x: 428.73047, y: 566.13055}
+      - {x: 382.68164, y: 663}
+    - - {x: 1471.9746, y: 504.1976}
+      - {x: 1324.3008, y: 508.96167}
+      - {x: 687.55664, y: 508.96167}
+      - {x: 562.1133, y: 404.1521}
+      - {x: 562.1133, y: 294.57846}
+      - {x: 678.0293, y: 181.82875}
+      - {x: 1495.793, y: 181.82875}
+      - {x: 1626, y: 291.4024}
+      - {x: 1626, y: 388.27185}
+      - {x: 1608.5332, y: 431.1485}
+    - - {x: -1592.6543, y: 483.5533}
+      - {x: -1626, y: 405.7401}
+      - {x: -1626, y: 288.22635}
+      - {x: -1543.4297, y: 207.23712}
+      - {x: -746.3086, y: 207.23712}
+      - {x: -658.9746, y: 283.46228}
+      - {x: -658.9746, y: 475.6132}
+      - {x: -732.0176, y: 483.5533}
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

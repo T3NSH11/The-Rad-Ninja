@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class AbilityMain : MonoBehaviour
 {
-    //public bool enemyInRange;
-    public bool takedownActive;
     public float TeleportRange;
     public float ShurikenSpeed;
     public float TeleportSpeed;
-    public float takedownRange;
-    public float distance;
     public GameObject TeleportMarker;
     public GameObject SmokeTrail;
     public GameObject Player;
-    public GameObject Enemy;
     public GameObject ShurikenObj;
     public GameObject CameraObj;
     public GameObject Crosshair;
@@ -24,10 +19,12 @@ public class AbilityMain : MonoBehaviour
     public LayerMask Climbable;
     public LayerMask ObstacleLayer;
     AbilityBase Ability;
+    public AudioSource source;
+    public AudioClip clip;
         
     void Start()
     {
-        Ability = new Takedown();
+        Ability = new Teleport();
     }
 
     void Update()
