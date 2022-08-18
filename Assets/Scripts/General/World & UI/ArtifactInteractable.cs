@@ -21,8 +21,10 @@ public class ArtifactInteractable : Interactable
     [SerializeField] Texture2D itemPortrait;
 
 
-    [SerializeField] AudioClip narration;
+    public AudioClip narration;
     AudioSource audioSource;
+    public AudioSource source;
+    public AudioClip clip;
 
 
     ParticleSystem particles;
@@ -31,7 +33,10 @@ public class ArtifactInteractable : Interactable
 
     
     public override void OnInteraction()
-    { 
+    {
+        audioSource.clip = narration;
+        audioSource.Play();
+        source.PlayOneShot(clip);
 
         previousTimescale = Time.timeScale;
         Time.timeScale = 0f; // pause game
@@ -49,7 +54,7 @@ public class ArtifactInteractable : Interactable
                              new Vector2(0, 0)); // set image to given object thumbnail
 
 
-        //audioSource.Play(); // play narration
+        
 
         // activate the relevant powerup here, if there is one.
         // eg: player.powerup.enabled = true; // set powerup in inspector
@@ -72,13 +77,15 @@ public class ArtifactInteractable : Interactable
             descTextbox.text = ""; 
             artifactInfoDisplay.SetActive(false);
             DialogueHandler.playerHUD.SetActive(true);
-            
+
             //particles.Play();
             //particles.Emit(50);
             //transform.DetachChildren();
             //this.gameObject.SetActive(false);
 
             gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.6f, 0.6f, 0.6f);
+
+            audioSource.Stop();
 
             interactionActive = false;
             interactionIcon.gameObject.SetActive(true);
@@ -108,6 +115,7 @@ public class ArtifactInteractable : Interactable
             artifactInfoDisplay.SetActive(false);
 
         audioSource = GetComponent<AudioSource>();
+        audioSource.Stop();
         //textbox = GameObject.Find("Item Description Box").GetComponent<TextMeshProUGUI>();
 
         //particles = transform.GetChild(0).GetComponent<ParticleSystem>();

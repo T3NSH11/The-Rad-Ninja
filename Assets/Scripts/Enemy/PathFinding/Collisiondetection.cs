@@ -13,7 +13,7 @@ public class Collisiondetection : MonoBehaviour
             node.IsObstacle = true;
         }
 
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Cripto"))
         {
             pathfinder.TargetNode = node;
         }
