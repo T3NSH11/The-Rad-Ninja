@@ -13,6 +13,12 @@ public class Attack : EnemyState
     public override void UpdateState(EnemyManager manager)
     {
         manager.transform.LookAt(new Vector3(manager.Player.transform.position.x, manager.transform.position.y, manager.Player.transform.position.z));
+
+        if(Vector3.Distance(manager.transform.position, manager.Player.transform.position) > manager.AttackRange)
+        {
+            manager.SwitchState(manager.ChasePlayer);
+        }
+
         if (manager.Attackcooldown <= 0)
         {
             manager.MyAnimator.SetBool("Moving", false);
@@ -28,9 +34,5 @@ public class Attack : EnemyState
         //    manager.SwitchState(manager.SearchForPlayer);
         //}
 
-        if(Vector3.Distance(manager.transform.position, manager.Player.transform.position) > manager.AttackRange)
-        {
-            manager.SwitchState(manager.ChasePlayer);
-        }
     }
 }
