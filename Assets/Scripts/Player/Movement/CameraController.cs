@@ -104,7 +104,7 @@ public class CameraController : MonoBehaviour
         if (ClipPointCollisionDetected(transform.position))
         {
             adjustedDistance = GetCollisionDistance(transform.position);
-
+            
             cameraObj.transform.localPosition = Vector3.SmoothDamp(cameraObj.transform.localPosition,
                                                          new Vector3(shoulderOffset, 0, -adjustedDistance + 0.2f), 
                                                          ref collisionSmoothing, movementSpeed);
