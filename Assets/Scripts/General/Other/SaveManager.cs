@@ -14,6 +14,7 @@ public class SaveManager : MonoBehaviour
     {
         data = new SaveData(checkpoint, health);
         SaveLoad.Save(data, filePath);
+        Debug.Log("Saving with " + data);
     }
 
 
@@ -26,13 +27,15 @@ public class SaveManager : MonoBehaviour
     public void LoadSlot(SaveData dataToWriteTo, string filePath)
     {
         SaveLoad.Load(dataToWriteTo, filePath);
-        dataToWriteTo.FinishLoad(); // set the in-game variables to the given data.
+        //dataToWriteTo.FinishLoad(); // set the in-game variables to the given data. 
+        //PlayerHealth.currentHealth = dataToWriteTo.currentHealth;
+        Debug.Log("Loaded " + dataToWriteTo);
     }
 
 
 
     // functions for saving different data to different paths.
-    public void SaveToSlot1() { SaveToSlot(saveSlot1, SaveLoad.filePath1); }
+    public void SaveToSlot1() { SaveToSlot(saveSlot1, SaveLoad.filePath1); Debug.Log("Saving to file 1."); }
     public void SaveToSlot2() { SaveToSlot(saveSlot2, SaveLoad.filePath2); }
     public void SaveToSlot3() { SaveToSlot(saveSlot3, SaveLoad.filePath3); }
 

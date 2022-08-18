@@ -54,8 +54,7 @@ public static class SaveLoad
         {
             BinaryFormatter formatter = new BinaryFormatter();
             givenSave = (SaveData)formatter.Deserialize(stream);
-
-            //givenSave.FinishLoad();  // sets the variables in game to the data that we've loaded from the file. 
+            givenSave.FinishLoad();  // sets the variables in game to the data that we've loaded from the file. 
         }
     }
 

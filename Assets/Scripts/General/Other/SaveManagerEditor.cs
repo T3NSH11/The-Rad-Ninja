@@ -27,8 +27,8 @@ public class SaveManagerEditor : Editor // a class for testing functionality in 
         EditorGUILayout.Space(10f); // add some space to keep inspector neat
 
         // controls for saving
-        EditorGUILayout.Vector3Field("Save No.1 Checkpoint", save1Checkpoint);
-        EditorGUILayout.FloatField("Save No.1 Health", save1Health); // create an inspector field with the given type to take in user input
+        save1Checkpoint = EditorGUILayout.Vector3Field("Save No.1 Checkpoint", save1Checkpoint);
+        save1Health = EditorGUILayout.FloatField("Save No.1 Health", save1Health); // create an inspector field with the given type to take in user input
         EditorGUILayout.Space();
 
         if (GUILayout.Button("Save Values to Slot 1")) // executes save with user inputted values if button is clicked
@@ -45,8 +45,8 @@ public class SaveManagerEditor : Editor // a class for testing functionality in 
 
 
 
-        EditorGUILayout.Vector3Field("Save No.2 Checkpoint", save2Checkpoint);
-        EditorGUILayout.FloatField("Save No.2 Health", save2Health);
+        save2Checkpoint = EditorGUILayout.Vector3Field("Save No.2 Checkpoint", save2Checkpoint);
+        save2Health = EditorGUILayout.FloatField("Save No.2 Health", save2Health);
         EditorGUILayout.Space();
 
         if (GUILayout.Button("Save Values to Slot 2")) 
@@ -63,8 +63,8 @@ public class SaveManagerEditor : Editor // a class for testing functionality in 
 
 
 
-        EditorGUILayout.Vector3Field("Save No.3 Checkpoint", save3Checkpoint);
-        EditorGUILayout.FloatField("Save No.3 Health", save3Health);
+        save3Checkpoint = EditorGUILayout.Vector3Field("Save No.3 Checkpoint", save3Checkpoint);
+        save3Health = EditorGUILayout.FloatField("Save No.3 Health", save3Health);
         EditorGUILayout.Space();
 
         if (GUILayout.Button("Save Values to Slot 3"))
