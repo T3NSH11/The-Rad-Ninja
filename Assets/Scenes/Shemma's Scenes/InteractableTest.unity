@@ -259,6 +259,7 @@ MonoBehaviour:
   - '[ANNA]Here''s an example of text that goes larger than the other ones, so you
     can get an idea of how much text you can put in this box'
   dialogueAudio: []
+  Message: {fileID: 0}
 --- !u!135 &118363167
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2051,6 +2052,7 @@ MonoBehaviour:
   Crosshair: {fileID: 0}
   PlayerRenderer: {fileID: 0}
   PlayerAnim: {fileID: 0}
+  PlayerController: {fileID: 1942905417}
   GroundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -2747,3 +2749,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e10922052f7b37458cf51ac1e73285a, type: 3}
+--- !u!1001 &4404678821539604380
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 179.31107
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 112.9068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 65.015564
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658533, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404678822501658538, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b58c852574d5fb54a9e70ed8e686784b, type: 3}

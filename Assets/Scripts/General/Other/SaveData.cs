@@ -16,6 +16,12 @@ public class SaveData : MonoBehaviour
         currentHealth = PlayerHealth.currentHealth;
     }
 
+    public SaveData(Vector3 checkpoint, float health)
+    {
+        currentCheckpoint = checkpoint;
+        currentHealth = health;
+    }
+
     // called at the end of the load function. sets the variables to the ones loaded from file.
     public void FinishLoad(){
 

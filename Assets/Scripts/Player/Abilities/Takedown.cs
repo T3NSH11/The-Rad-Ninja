@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Takedown : AbilityBase
 {
-    //bool takedownActive = false;
+    bool takedownActive = false;
     bool takedownAnimPlay = false;
 
-    Ray checkRay;
-    Ray checkRay2;
-    Ray checkRay3;
+    Ray frontCheckRay;
+    Ray leftCheckRay;
+    Ray rightCheckRay;
     RaycastHit hit;
     Vector3 checkHeight = new Vector3(0, 1, 0);
 
@@ -17,44 +17,53 @@ public class Takedown : AbilityBase
 
     public override void Activation(AbilityMain Main)
     {
+        /*
         // check for enemy in range if we're not already in the middle of a takedown
-        /*if (!takedownActive)
+        if (!takedownActive)
         {
-            checkRay = new Ray(Main.transform.position + checkHeight, 
-                           ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight);
-            checkRay2 = new Ray(Main.transform.position + checkHeight, 
-                            ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight + Vector3.left);
-            checkRay3 = new Ray(Main.transform.position + checkHeight, 
-                            ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight + Vector3.right);
 
-            Debug.DrawLine(Main.transform.position + checkHeight, 
+            Vector3 checkVectorOrigin = Main.transform.position + checkHeight;
+            Vector3 checkVectorDir = ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight;
+
+            frontCheckRay = new Ray(Main.transform.position + checkHeight,
+                                   ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight);
+
+            leftCheckRay = new Ray(Main.transform.position + checkHeight,
+                                  ((Main.transform.forward + Vector3.left).normalized * Main.takedownRange + (Main.transform.position + Vector3.left).normalized) + checkHeight);
+
+            rightCheckRay = new Ray(Main.transform.position + checkHeight,
+                                   ((Main.transform.forward + Vector3.right).normalized * Main.takedownRange + (Main.transform.position + Vector3.right).normalized) + checkHeight);
+
+
+            Debug.DrawLine(Main.transform.position + checkHeight,
                 ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight, Color.red);
-            Debug.DrawLine(Main.transform.position + checkHeight, 
-                ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight + Vector3.left, Color.red);
-            Debug.DrawLine(Main.transform.position + checkHeight, 
-                ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight + Vector3.right, Color.red);
+            Debug.DrawLine(Main.transform.position + checkHeight,
+                ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight + Vector3.left, Color.green);
+            Debug.DrawLine(Main.transform.position + checkHeight,
+                ((Main.transform.forward * Main.takedownRange) + Main.transform.position) + checkHeight + Vector3.right, Color.yellow);
 
             // set our target according to the hit we get.
-            if (Physics.Raycast(checkRay, out hit, Main.takedownRange))// && !Interactable.interactionActive)
+            if (Physics.Raycast(frontCheckRay, out hit, Main.takedownRange))// && !Interactable.interactionActive)
             {
                 if (hit.collider.CompareTag("Enemy"))
                 {
-                    enemy = hit.collider.gameObject; 
-                    Main.enemyInRange = true;
+                    //enemy = hit.collider.gameObject; 
+                    Main.Enemy = hit.collider.gameObject;
                 }
             }
                 else
-                    Main.enemyInRange = false;
-        }*/
+                    Main.Enemy = null;
+        }
+        */
         
 
-        if (Input.GetKey(KeyCode.L) && !Main.takedownActive && Main.Enemy != null)
+        if (Input.GetMouseButtonDown(0) && !Main.takedownActive && Main.Enemy != null)
         {
-            //Debug.Log("tried takedown");
             // && !enemy.GetComponent<EnemyManager>().FOV.PlayerDetected)
             
-            Main.Player.GetComponent<ThirdPersonController>().enabled = false;
+            Main.GetComponent<ThirdPersonController>().enabled = false;
             enemy = Main.Enemy;
+            //takedownActive = true;
             Main.takedownActive = true;
             //enemy.transform.rotation = Main.Player.transform.rotation;
             enemy.transform.rotation = Quaternion.LookRotation(enemy.transform.position - Main.Player.transform.position);
@@ -74,12 +83,7 @@ public class Takedown : AbilityBase
             }
             else
             {
-                Main.Player.transform.LookAt(enemy.transform.position);
-                //Main.Player.transform.rotation = enemy.transform.rotation;
-
-                enemy.transform.rotation = Main.Player.transform.rotation;
-                Main.Player.GetComponent<ThirdPersonController>().enabled = true;
-                Main.takedownActive = false;
+                Main.StartCoroutine(TakedownExecution(Main));
             }
         }
 
@@ -94,5 +98,20 @@ public class Takedown : AbilityBase
         }*/
     }
 
+    IEnumerator TakedownExecution(AbilityMain Main)
+    {
+        Main.Player.transform.LookAt(enemy.transform.position);
+        //Main.Player.transform.rotation = enemy.transform.rotation;
+        //enemy.transform.rotation = Main.Player.transform.rotation;
 
+        //Main.PlayerAnim.Play("Takedown");
+        //enemy.GetComponent<Animator>().Play("td");
+        //play a sound effect for the takedown.
+
+        //yield return new WaitUntil(Main.PlayerAnim.animDone);
+        yield return new WaitForSeconds(2f);
+
+        Main.GetComponent<ThirdPersonController>().enabled = true;
+        Main.takedownActive = false;
+    }
 }

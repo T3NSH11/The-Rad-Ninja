@@ -8,35 +8,54 @@ public static class SaveLoad
 {
     static SaveData saveData; // object to hold the data we want saved
 
-    static string filePath = Application.persistentDataPath + "/playersave.dat";
+    static SaveData prevSave;
+    static string prevSavePath;
+
+    public static string filePath1 = Application.persistentDataPath + "/playersaveone.dat";
+    public static string filePath2 = Application.persistentDataPath + "/playersavetwo.dat";
+    public static string filePath3 = Application.persistentDataPath + "/playersavethree.dat"; // names for different file paths 
 
 
     // should be called when the player dies, or reaches a checkpoint
     public static void Save(){
 
-        using (FileStream stream = new FileStream(filePath, FileMode.Create))
+        using (FileStream stream = new FileStream(filePath1, FileMode.Create)) // default to save 1.
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            saveData = new SaveData();
+            saveData = new SaveData(); 
             formatter.Serialize(stream, saveData);
         }
     }
 
-    public static void Load(){
+    public static void Save(SaveData givenSave, string saveTo)
+    {
 
-        if (!File.Exists(filePath))
+        using (FileStream stream = new FileStream(saveTo, FileMode.Create))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            saveData = givenSave;
+            formatter.Serialize(stream, saveData);
+        }
+
+        prevSave = givenSave;
+        prevSavePath = saveTo;
+    }
+
+
+    public static void Load(SaveData givenSave, string loadFrom){
+
+        if (!File.Exists(loadFrom))
         {
             Debug.LogError("Save file couldn't be found!");
             return;
         }
 
-        using (FileStream stream = new FileStream(filePath, FileMode.Open))
+        using (FileStream stream = new FileStream(loadFrom, FileMode.Open))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            saveData = (SaveData)formatter.Deserialize(stream); 
-                                                                
+            givenSave = (SaveData)formatter.Deserialize(stream);
 
-            saveData.FinishLoad();  // sets the variables in game to the data that we've loaded from the file. 
+            //givenSave.FinishLoad();  // sets the variables in game to the data that we've loaded from the file. 
         }
     }
 

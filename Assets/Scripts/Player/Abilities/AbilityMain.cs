@@ -33,7 +33,7 @@ public class AbilityMain : MonoBehaviour
     void Update()
     {
         Ability.Activation(this);
-        distance = Vector3.Distance(Player.transform.position, -Enemy.transform.forward.normalized + Enemy.transform.position);
+        //distance = Vector3.Distance(Player.transform.position, -Enemy.transform.forward.normalized + Enemy.transform.position);
     }
 
     public void SwitchState(AbilityBase NewAbility)
@@ -43,7 +43,7 @@ public class AbilityMain : MonoBehaviour
 
 
     // For testing purposes.
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
@@ -57,5 +57,5 @@ public class AbilityMain : MonoBehaviour
         {
             Enemy = null;
         }
-    }*/
+    }
 }
