@@ -1,12 +1,17 @@
 fileFormatVersion: 2
 guid: d7ba52e3aa507074296c1dd2b4414924
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 20300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch18_Body
+    second: {fileID: 2100000, guid: 841b0b6139d29a54791fa71823f8900e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -850,6 +855,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
