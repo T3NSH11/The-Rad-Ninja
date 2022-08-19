@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Interactable
   - Light
+  - Cripto
+  - Whisper
   layers:
   - Default
   - TransparentFX

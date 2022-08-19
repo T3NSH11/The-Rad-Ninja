@@ -9,6 +9,9 @@ public class TriggerSFX : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         source.Play();
+        if (this.CompareTag("Whisper"))
+        {
         Destroy(this.gameObject);
+        }
     }
 }
