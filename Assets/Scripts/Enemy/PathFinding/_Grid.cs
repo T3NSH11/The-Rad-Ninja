@@ -63,7 +63,7 @@ public class _Grid : MonoBehaviour
                 Gizmos.color = Color.red;
             }
     
-            Gizmos.DrawSphere(Nodes[i].WorldPosition, ((CellSize * 2) + (2 * CellSize)) / 20);
+            Gizmos.DrawSphere(Nodes[i].WorldPosition, CellSize / 2);
         }
     }
 
