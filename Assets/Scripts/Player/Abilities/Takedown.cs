@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Takedown : AbilityBase
 {
-    bool takedownActive = false;
-    bool takedownAnimPlay = false;
+    bool takedownExecuting = false;
 
     Ray frontCheckRay;
     Ray leftCheckRay;
@@ -55,24 +54,26 @@ public class Takedown : AbilityBase
                     Main.Enemy = null;
         }
         */
-        
 
-        if (Input.GetMouseButtonDown(0) && !Main.takedownActive && Main.Enemy != null)
+
+        if (Input.GetMouseButtonDown(0) && !Main.takedownActive && !takedownExecuting && Main.Enemy != null)
         {
-            // && !enemy.GetComponent<EnemyManager>().FOV.PlayerDetected)
-            
-            Main.GetComponent<ThirdPersonController>().enabled = false;
-            enemy = Main.Enemy;
-            //takedownActive = true;
-            Main.takedownActive = true;
-            //enemy.transform.rotation = Main.Player.transform.rotation;
-            enemy.transform.rotation = Quaternion.LookRotation(enemy.transform.position - Main.Player.transform.position);
+            if (!Main.Enemy.GetComponent<EnemyManager>().FOV.PlayerDetected) 
+            { 
+                Main.GetComponent<ThirdPersonController>().enabled = false;
+                enemy = Main.Enemy;
+                //takedownActive = true;
+                Main.takedownActive = true;
 
+                //enemy.transform.rotation = Main.Player.transform.rotation;
+                enemy.transform.rotation = Quaternion.LookRotation(enemy.transform.position - Main.Player.transform.position);
+            }
         }
 
         if (Main.takedownActive)
         {
-            if (Vector3.Distance(Main.Player.transform.position, -enemy.transform.forward.normalized + enemy.transform.position) >= 0.2f)
+            if (Vector3.Distance(Main.Player.transform.position, -enemy.transform.forward.normalized + enemy.transform.position) > 1.4f) 
+                //|| Vector3.Distance(Main.Player.transform.position, -enemy.transform.forward.normalized + enemy.transform.position) < 1.2f)
             {
                 // move player towards enemy if we aren't close enough for a takedown yet
                 Main.Player.transform.position = Vector3.MoveTowards(
@@ -100,18 +101,35 @@ public class Takedown : AbilityBase
 
     IEnumerator TakedownExecution(AbilityMain Main)
     {
-        Main.Player.transform.LookAt(enemy.transform.position);
-        //Main.Player.transform.rotation = enemy.transform.rotation;
-        //enemy.transform.rotation = Main.Player.transform.rotation;
+        Main.takedownActive = false;
+        takedownExecuting = true;
 
-        //Main.PlayerAnim.Play("Takedown");
-        //enemy.GetComponent<Animator>().Play("td");
+        Main.Player.transform.LookAt(enemy.transform.position);
+        //enemy.transform.rotation = Quaternion.LookRotation(enemy.transform.position - Main.Player.transform.position);
+        //Main.Player.transform.rotation = enemy.transform.rotation;
+
+        enemy.transform.parent = Main.Player.transform;
+        enemy.GetComponent<Rigidbody>().detectCollisions = false;
+        //enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        enemy.transform.localPosition = new Vector3(0, 0f, 0.26f);//(Main.Player.transform.position.x, Main.Player.transform.position.y, Main.Player.transform.position.z);
+        enemy.transform.rotation = Main.Player.transform.rotation; // set up the enemy for the kill animation
+
+
+        Main.PlayerAnim.SetBool("Takedown", true);
+        enemy.GetComponent<Animator>().SetTrigger("Taken Down");
         //play a sound effect for the takedown.
 
-        //yield return new WaitUntil(Main.PlayerAnim.animDone);
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(6.3f); // wait for animations and audio to play out
+
+
+        Main.PlayerAnim.SetBool("Takedown", false);
+        enemy.transform.parent = null;
+        // remove the enemy body here.
+
 
         Main.GetComponent<ThirdPersonController>().enabled = true;
-        Main.takedownActive = false;
+        enemy = null;
+        takedownExecuting = false;
     }
 }
