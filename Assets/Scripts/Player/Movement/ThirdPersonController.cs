@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
 {
-
+    public PlayerHealth health;
     public Camera MyCamera;
+    public PauseMenu pauseMenu;
     public float Speed = 2f;
     public float SprintSpeed = 5f;
+    public GameObject DeathScreen;
 
     public float RotationSpeed = 15f;
     public float AnimationBlendSpeed = 2f;
@@ -67,5 +69,17 @@ public class ThirdPersonController : MonoBehaviour
         Quaternion currentRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, mDesiredRotation, 0);
         transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, RotationSpeed * Time.deltaTime);
+
+        if (PlayerHealth.currentHealth <= 0)
+        {
+            DeathScreen.SetActive(true);
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.Confined;
+            pauseMenu.HUD.SetActive(false);
+            pauseMenu.Cam.GetComponent<CameraController>().enabled = false;
+
+        }
     }
+
+
 }

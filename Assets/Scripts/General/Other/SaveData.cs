@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
+    public PlayerHealth health;
     SerializableVector3 currentCheckpoint;
     public float currentHealth;
     float currentMana;

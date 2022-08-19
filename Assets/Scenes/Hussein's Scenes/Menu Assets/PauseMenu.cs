@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
                 HUD.SetActive(false);
                 Cam.GetComponent<CameraController>().enabled = false;
             }
-            else
+            else if(isPaused)
             {
                 ResumeGame();
                 Cursor.lockState = CursorLockMode.Locked;

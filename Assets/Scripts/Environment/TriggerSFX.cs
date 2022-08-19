@@ -5,13 +5,16 @@ using UnityEngine;
 public class TriggerSFX : MonoBehaviour
 {
     public AudioSource source;
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        source.Play();
-        if (this.CompareTag("Whisper"))
+        if (other.gameObject.CompareTag("Cripto"))
         {
-        Destroy(this.gameObject);
+            source.Play();
+            if (this.CompareTag("Whisper"))
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }
