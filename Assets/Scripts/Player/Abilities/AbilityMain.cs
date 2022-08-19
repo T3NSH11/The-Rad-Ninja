@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class AbilityMain : MonoBehaviour
 {
+    public bool takedownActive;
     public float TeleportRange;
     public float ShurikenSpeed;
     public float TeleportSpeed;
     public float BlinderSpeed;
     public float BlindRange;
+    public float takedownRange;
+    public float distance;
     public GameObject TeleportMarker;
     public GameObject SmokeTrail;
     public GameObject Player;
@@ -16,6 +19,7 @@ public class AbilityMain : MonoBehaviour
     public GameObject CameraObj;
     public GameObject Crosshair;
     public GameObject BlindingOBJ;
+    public GameObject Enemy;
     public Renderer PlayerRenderer;
     public Animator PlayerAnim;
     public LayerMask GroundLayer;

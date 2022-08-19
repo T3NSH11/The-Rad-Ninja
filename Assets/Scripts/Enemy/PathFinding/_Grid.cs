@@ -37,34 +37,36 @@ public class _Grid : MonoBehaviour
     {
         lengthx = CellSize * GridSize;
         lengthy = CellSize * GridSize;
+
         float LineDisplacement = 0;
         Gizmos.color = new Color(0, 0, 1, 0.25f);
-    
+        
         for (float i = 0; i < GridSize + 1; i++)
         {
-            Gizmos.DrawLine(transform.position + new Vector3(0, 0, LineDisplacement), new Vector3(lengthy, 0, transform.position.z + LineDisplacement));
+            Gizmos.DrawLine(transform.position + new Vector3(lengthy, 0, LineDisplacement), new Vector3(transform.position.x, 0, transform.position.z + LineDisplacement));
             LineDisplacement += CellSize;
         }
-    
+        
         LineDisplacement = 0;
-    
+        
         for (float i = 0; i < GridSize + 1; i++)
         {
             Gizmos.DrawLine(transform.position + new Vector3(LineDisplacement, 0, lengthx), new Vector3(transform.position.x + LineDisplacement, 0, transform.position.z));
             LineDisplacement += CellSize;
         }
-    
+        
         for (int i = 0; i < NodeCount; i++)
         {
             Gizmos.color = new Color(0, 1, 0, 0.25f);
-    
+        
             if (Nodes[i].IsObstacle == true)
             {
                 Gizmos.color = Color.red;
             }
-    
+        
             Gizmos.DrawSphere(Nodes[i].WorldPosition, CellSize / 2);
         }
+
     }
 
     public void SetNodes()
@@ -84,7 +86,7 @@ public class _Grid : MonoBehaviour
                 NodeWorldPositionsz[i] = Nodes[i].WorldPosition.z;
 
                 GameObject collider = Instantiate(SphereCollider, Nodes[i].WorldPosition, Quaternion.identity, SphereColliderContainer.transform);
-                collider.GetComponent<SphereCollider>().radius = CellSize/2;
+                collider.GetComponent<SphereCollider>().radius = CellSize / 2;
                 collider.GetComponent<Collisiondetection>().node = Nodes[i];
                 collider.GetComponent<Collisiondetection>().pathfinder = PathFinder;
                 ColCount++;
