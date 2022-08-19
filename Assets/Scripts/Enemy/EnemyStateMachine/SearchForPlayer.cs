@@ -32,7 +32,7 @@ public class SearchForPlayer : EnemyState
 
         if(manager.FOV.PlayerDetected)
         {
-            manager.SwitchState(manager.ChasePlayer);
+            manager.SwitchState(manager.Detect);
         }
 
         if (Vector3.Distance(manager.transform.position, manager.Player.transform.position) < manager.AttackRange)

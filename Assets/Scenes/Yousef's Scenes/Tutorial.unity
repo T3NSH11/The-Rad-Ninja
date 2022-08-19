@@ -1182,7 +1182,7 @@ GameObject:
   - component: {fileID: 64133181}
   m_Layer: 8
   m_Name: Roofroof
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14760,7 +14760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018803645860592895, guid: 8dcda3d2456ca0147b536b66a0cbcab2, type: 3}
       propertyPath: RangeRadius
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5289256222217177286, guid: 8dcda3d2456ca0147b536b66a0cbcab2, type: 3}
       propertyPath: m_Name
@@ -19926,6 +19926,20 @@ MonoBehaviour:
     m_Bits: 256
   source: {fileID: 0}
   clip: {fileID: 0}
+--- !u!114 &830955161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830955153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340b279c492aac8478f2f360ee567726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbarSlider: {fileID: 1257974845}
+  maxHealth: 100
 --- !u!4 &831256659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4083515464686534, guid: f14a0998d181cb949b0ff9e711194bbe, type: 3}
@@ -32673,7 +32687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018803645860592895, guid: 8dcda3d2456ca0147b536b66a0cbcab2, type: 3}
       propertyPath: RangeRadius
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5289256222217177286, guid: 8dcda3d2456ca0147b536b66a0cbcab2, type: 3}
       propertyPath: m_Name
@@ -41228,7 +41242,7 @@ GameObject:
   - component: {fileID: 1747884136}
   m_Layer: 0
   m_Name: Main Camera CM
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41672,7 +41686,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh366470
+  m_Name: pb_Mesh52208
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -45181,7 +45195,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh366402
+  m_Name: pb_Mesh52134
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -49357,7 +49371,7 @@ GameObject:
   - component: {fileID: 2112335809}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

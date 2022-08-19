@@ -13,12 +13,21 @@ public class EnemyFOV : MonoBehaviour
     public LayerMask PlayerMask;
     public LayerMask WallMask;
 
-    public bool PlayerDetected;
+    public bool PlayerDetected = false;
 
     public Vector3 directionToPlayer;
     public Transform PlayerTransform;
     public AudioSource source;
     public AudioClip clip;
+
+    public Vector3 DirectionFromAngle(float Angle,bool angleIsGlobal)
+    {
+        if (!angleIsGlobal)
+        {
+            Angle += transform.eulerAngles.y;
+        }
+        return new Vector3(Mathf.Sin(Angle * Mathf.Deg2Rad), 0, Mathf.Cos(Angle * Mathf.Deg2Rad));
+    }
 
     private void Update()
     {
@@ -38,7 +47,7 @@ public class EnemyFOV : MonoBehaviour
             {
                 float distanceToTarget = Vector3.Distance(transform.position, PlayerTransform.position);
 
-                if (!Physics.Raycast(transform.position, directionToPlayer, distanceToTarget, WallMask))
+                if (Physics.Raycast(transform.position, directionToPlayer, distanceToTarget, PlayerMask))
                 {
                     PlayerDetected = true;
                     source.PlayOneShot(clip);
