@@ -7,19 +7,25 @@ using TMPro;
 public class DialogueHandler : MonoBehaviour
 {
     
-    static Image panel;
+    static public GameObject playerHUD { get; private set; }
+    static ThirdPersonController playerController;
+    static public Image textbox { get; private set; }
     static TextMeshProUGUI displayName;
     static TextMeshProUGUI displayText; // make sure these are parented to the obj with the script
 
-    static ThirdPersonController playerController;
-    static GameObject playerHUD;
+    static Image portraitBox;
+    [SerializeField] Texture2D criptoPortrait;
+    [SerializeField] Texture2D annaPortrait;
+    [SerializeField] Texture2D mustafaPortrait;
+    [SerializeField] Texture2D zeusPortrait;
+
+    public static bool dialogueActive {  get; private set; }
 
     static List<string> currentDialogueText = new List<string>(20);
     static List<AudioClip> currentDialogueAudio = new List<AudioClip>(20);
     static AudioSource audioSource;
 
     static int index = -1;
-    public static bool dialogueActive {  get; private set; }
 
 
     static DialogueHandler handler;
@@ -32,11 +38,12 @@ public class DialogueHandler : MonoBehaviour
         else
             Destroy(this);
 
-
         audioSource = GetComponent<AudioSource>();
 
-        panel = gameObject.GetComponentInChildren<Image>();
-        displayText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        GameObject textboxObj = transform.GetChild(0).gameObject;
+        textbox = textboxObj.GetComponent<Image>();
+        displayText = textboxObj.GetComponentInChildren<TextMeshProUGUI>();
+        portraitBox = textboxObj.transform.GetChild(1).gameObject.GetComponent<Image>();
 
 
         playerController = GameObject.Find("Cripto").GetComponent<ThirdPersonController>();
@@ -44,7 +51,7 @@ public class DialogueHandler : MonoBehaviour
 
 
         displayText.text = "";
-        panel.gameObject.SetActive(false);
+        textbox.gameObject.SetActive(false);
         dialogueActive = false;
 
     }
@@ -55,6 +62,7 @@ public class DialogueHandler : MonoBehaviour
         if (dialogueActive && Input.GetKeyDown(KeyCode.Space))
         {
             DisplayNextLine();
+            //Debug.Log(dialogueActive);
         }
     }
 
@@ -67,7 +75,7 @@ public class DialogueHandler : MonoBehaviour
         playerHUD.SetActive(false);
 
         // make textbox appear
-        panel.gameObject.SetActive(true);
+        textbox.gameObject.SetActive(true);
 
 
         currentDialogueText.Clear();
@@ -81,10 +89,11 @@ public class DialogueHandler : MonoBehaviour
 
     }
 
-    static void DisplayNextLine(){
+    void DisplayNextLine() {
 
 
         index++;
+        //audioSource.Stop();
 
         if (index >= currentDialogueText.Count) // if list is empty, resume game
         {
@@ -93,16 +102,51 @@ public class DialogueHandler : MonoBehaviour
             playerHUD.SetActive(true);
 
             displayText.text = "";
-            panel.gameObject.SetActive(false);
-            Debug.Log("kasodksaod");
+            textbox.gameObject.SetActive(false);
+
 
             return;
         }
+        else
+        {
+
+            if (currentDialogueText[index].StartsWith("[CRIPTO]"))
+            {
+                currentDialogueText[index] = currentDialogueText[index].Remove(0, 8);
+                portraitBox.sprite = Sprite.Create(criptoPortrait,
+                                                   new Rect(new Vector2(0, 0), 
+                                                   new Vector2(criptoPortrait.width, criptoPortrait.height)),
+                                                   new Vector2(0, 0)); // set image to given object thumbnail
+            }
+            if (currentDialogueText[index].StartsWith("[ANNA]"))
+            {
+                currentDialogueText[index] = currentDialogueText[index].Remove(0, 6);
+                portraitBox.sprite = Sprite.Create(annaPortrait,
+                                                   new Rect(new Vector2(0, 0),
+                                                   new Vector2(annaPortrait.width, annaPortrait.height)),
+                                                   new Vector2(0, 0));
+            }
+            if (currentDialogueText[index].StartsWith("[MUSTAFA]"))
+            {
+                currentDialogueText[index] = currentDialogueText[index].Remove(0, 9);
+                portraitBox.sprite = Sprite.Create(mustafaPortrait,
+                                                   new Rect(new Vector2(0, 0),
+                                                   new Vector2(mustafaPortrait.width, mustafaPortrait.height)),
+                                                   new Vector2(0, 0));
+            }
+            if (currentDialogueText[index].StartsWith("[ZEUS]"))
+            {
+                currentDialogueText[index] = currentDialogueText[index].Remove(0, 9);
+                portraitBox.sprite = Sprite.Create(zeusPortrait,
+                                                   new Rect(new Vector2(0, 0),
+                                                   new Vector2(zeusPortrait.width, zeusPortrait.height)),
+                                                   new Vector2(0, 0));
+            }
 
 
+            displayText.text = currentDialogueText[index]; // display text in the list at current index.
 
-
-        displayText.text = currentDialogueText[index]; // display text in the list at current index.
+        }
 
         //audioSource.clip = currentDialogueAudio[index];
         //audioSource.Play();

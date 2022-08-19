@@ -17,6 +17,8 @@ public class EnemyFOV : MonoBehaviour
 
     public Vector3 directionToPlayer;
     public Transform PlayerTransform;
+    public AudioSource source;
+    public AudioClip clip;
 
     private void Update()
     {
@@ -39,6 +41,8 @@ public class EnemyFOV : MonoBehaviour
                 if (!Physics.Raycast(transform.position, directionToPlayer, distanceToTarget, WallMask))
                 {
                     PlayerDetected = true;
+                    source.PlayOneShot(clip);
+                    Debug.Log("Detected");
                 }
                 else
                     PlayerDetected = false;
