@@ -87,6 +87,7 @@ public class EnemyManager : MonoBehaviour
         CurrentState.UpdateState(this);
         Debug.Log(CurrentState);
         MyAnimator.SetFloat("Speed", Mathf.Lerp(MyAnimator.GetFloat("Speed"), mDesiredAnimationSpeed, AnimationBlendSpeed * Time.deltaTime));
+
     }
 
     public void SwitchState(EnemyState state)

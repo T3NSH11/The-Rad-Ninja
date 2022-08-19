@@ -55,7 +55,7 @@ public class PlayerVisibilityController : MonoBehaviour
 
         }
 
-        Debug.Log(currentTotalDistance);
+        //Debug.Log(currentTotalDistance);
 
         /*ray = new Ray(transform.position, closestLight.transform.position - transform.position);
         
@@ -94,11 +94,5 @@ public class PlayerVisibilityController : MonoBehaviour
             return 0;
     }
 
-    private void OnDrawGizmos()
-    {
-        for (int i = 0; i < lightsources.Length; i++)
-        {
-            Gizmos.DrawSphere(lightsources[i].transform.position, 0.5f);
-        }
-    }
+
 }

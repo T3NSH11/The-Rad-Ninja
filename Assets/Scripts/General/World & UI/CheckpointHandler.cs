@@ -23,7 +23,7 @@ public class CheckpointHandler : MonoBehaviour
 
     void Start(){
 
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Cripto");
         defaultSpawnpoint = player.transform.position;
 
         //Respawn();  // respawn should be called when the scene is loaded
