@@ -124,10 +124,10 @@ public class CameraController : MonoBehaviour
 
 
         
-        for (int i = 0; i < 5; i++)
+        /*for (int i = 0; i < 5; i++)
         {
             Debug.DrawLine(transform.position, clipPoints[i], Color.yellow);
-        }
+        }*/
 
 
     }

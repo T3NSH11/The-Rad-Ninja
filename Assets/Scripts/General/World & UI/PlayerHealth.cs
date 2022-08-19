@@ -22,24 +22,19 @@ public class PlayerHealth : MonoBehaviour
 
     void Start(){
 
+        healthbarSlider.maxValue = maxHealth;
         currentHealth = maxHealth;
         lowHealth = maxHealth / 3;
 
-        //healthbarSlider.maxValue = maxHealth;
-        //healthbarSlider.value = currentHealth;
     }
 
 
     void Update(){
 
         //healthbarLerpValue = Mathf.MoveTowards(healthbarSlider.value, currentHealth, slideSpeed);
-        //healthbarSlider.value = currentHealth;//Mathf.Lerp(healthbarSlider.value, currentHealth, slideSpeed);
+        healthbarSlider.value = currentHealth;//Mathf.Lerp(healthbarSlider.value, currentHealth, slideSpeed);
 
-
-        if (currentHealth <= lowHealth)
-        {
-            // low on health things like tired animation, flashing healthbar etc
-        }
+        //if (currentHealth <= lowHealth){ // low on health things like tired animation, flashing healthbar etc }
         
         if (currentHealth <= 0)
         {
@@ -52,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(5);
         }
+
     }
 
     public void TakeDamage(float damageToDeal)

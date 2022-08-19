@@ -61,11 +61,15 @@ public class Teleport : AbilityBase
                 }
             }
 
-            if (Physics.Raycast(ray, out hit, main.TeleportRange, main.ObstacleLayer))
+            //if ray hits any object that isn't the ground or a climbable object another ray is cast from the point where the origional ray hits the object. Second ray is cast straight downwards to the ground.
+            if (Physics.Raycast(ray, out hit, main.TeleportRange))
             {
-                if (Physics.Raycast(hit.point, new Vector3(0, -1, 0), out hit2, Mathf.Infinity))
+                if (!Physics.Raycast(ray, out hit, main.TeleportRange, main.Climbable) && !Physics.Raycast(ray, out hit, main.TeleportRange, main.GroundLayer))
                 {
-                    main.TeleportMarker.transform.position = hit2.point;
+                    if (Physics.Raycast(hit.point, new Vector3(0, -1, 0), out hit2, Mathf.Infinity))
+                    {
+                        main.TeleportMarker.transform.position = hit2.point;
+                    }
                 }
             }
 
@@ -102,7 +106,7 @@ public class Teleport : AbilityBase
             main.TeleportMarker.SetActive(false);
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             main.SwitchState(new ThrowShuriken());
         }
