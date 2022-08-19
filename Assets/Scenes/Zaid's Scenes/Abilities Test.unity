@@ -478,6 +478,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &292359927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7627967279836265084, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+  m_PrefabInstance: {fileID: 7627967280115905675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &292359928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292359927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e210cdc4afc42840ba34bcda6f675e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &372575305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,12 +1173,15 @@ MonoBehaviour:
   TeleportRange: 10
   ShurikenSpeed: 100
   TeleportSpeed: 25
+  BlinderSpeed: 300
+  BlindRange: 20
   TeleportMarker: {fileID: 1076666596}
   SmokeTrail: {fileID: 54734523}
   Player: {fileID: 1418993744}
   ShurikenObj: {fileID: 9180159519747520204, guid: b1dffd0cbdfeb554d92cd6199b63a861, type: 3}
   CameraObj: {fileID: 1929143813}
   Crosshair: {fileID: 258969893}
+  BlindingOBJ: {fileID: 7627967279836265084, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
   PlayerRenderer: {fileID: 1418993745}
   PlayerAnim: {fileID: 1418993749}
   GroundLayer:
@@ -1173,6 +1193,8 @@ MonoBehaviour:
   ObstacleLayer:
     serializedVersion: 2
     m_Bits: 256
+  source: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!114 &1418993748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,3 +1854,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a3d7da74b27e084489c471b8e2e251d, type: 3}
+--- !u!1001 &7627967280115905675
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.2834706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.209
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.878
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265075, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627967279836265084, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}
+      propertyPath: m_Name
+      value: Blinding Particle effect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e95df7c966d84c94c81f648f7ee27bc2, type: 3}

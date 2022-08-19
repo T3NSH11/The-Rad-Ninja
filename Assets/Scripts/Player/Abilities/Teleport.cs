@@ -110,5 +110,10 @@ public class Teleport : AbilityBase
         {
             main.SwitchState(new ThrowShuriken());
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            main.SwitchState(new Blind());
+        }
     }
 }

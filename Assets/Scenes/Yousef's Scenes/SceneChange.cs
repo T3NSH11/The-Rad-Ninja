@@ -7,6 +7,9 @@ public class SceneChange : MonoBehaviour
 {
    void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(2);
+        if (other.gameObject.CompareTag("Cripto"))
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 }

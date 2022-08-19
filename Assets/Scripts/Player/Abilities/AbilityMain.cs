@@ -7,12 +7,15 @@ public class AbilityMain : MonoBehaviour
     public float TeleportRange;
     public float ShurikenSpeed;
     public float TeleportSpeed;
+    public float BlinderSpeed;
+    public float BlindRange;
     public GameObject TeleportMarker;
     public GameObject SmokeTrail;
     public GameObject Player;
     public GameObject ShurikenObj;
     public GameObject CameraObj;
     public GameObject Crosshair;
+    public GameObject BlindingOBJ;
     public Renderer PlayerRenderer;
     public Animator PlayerAnim;
     public LayerMask GroundLayer;
