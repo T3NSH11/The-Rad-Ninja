@@ -40,5 +40,9 @@ public class ThrowShuriken : AbilityBase
         {
             main.SwitchState(new Blind());
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            main.SwitchState(new Takedown());
+        }
     }
 }

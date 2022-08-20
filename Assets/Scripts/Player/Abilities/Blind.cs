@@ -43,5 +43,9 @@ public class Blind : AbilityBase
         {
             Main.SwitchState(new ThrowShuriken());
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Main.SwitchState(new Takedown());
+        }
     }
 }

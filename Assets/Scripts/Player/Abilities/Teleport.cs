@@ -115,5 +115,9 @@ public class Teleport : AbilityBase
         {
             main.SwitchState(new Blind());
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            main.SwitchState(new Takedown());
+        }
     }
 }

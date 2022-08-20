@@ -60,6 +60,7 @@ public class PauseMenu : MonoBehaviour
     {
         string levelName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(levelName);
+        
     }
 
     public void GoToMainMenu()

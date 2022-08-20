@@ -88,6 +88,19 @@ public class Takedown : AbilityBase
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Main.SwitchState(new Teleport());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Main.SwitchState(new Blind());
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Main.SwitchState(new ThrowShuriken());
+        }
         /*if (Main.takedownActive && Vector3.Distance(Main.Player.transform.position, enemy.transform.position) < 0.6f)
         {
             enemy.transform.forward = Main.Player.transform.forward;

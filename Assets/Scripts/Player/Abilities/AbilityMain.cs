@@ -43,4 +43,20 @@ public class AbilityMain : MonoBehaviour
     {
         Ability = NewAbility;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy = null;
+        }
+    }
 }
