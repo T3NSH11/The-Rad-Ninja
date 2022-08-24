@@ -60,7 +60,7 @@ public class PauseMenu : MonoBehaviour
     {
         string levelName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(levelName);
-        
+        ResumeGame();
     }
 
     public void GoToMainMenu()
