@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AbilityBase">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Abilities\AbilityBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AbilityMain">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAgKIASAABgIAoAAQACAEoGgBAIAgUAAAIQAAAQA=</HashCode>
+      <FileName>Assets\Scripts\Player\Abilities\AbilityMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Blind" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Abilities\Blind.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Blinder" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Abilities\Blinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shuriken" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Abilities\Shuriken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Takedown" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAQAAAgAAAAAAAACAAAgAAAAAAIQAAAAAEAI=</HashCode>
+      <FileName>Assets\Scripts\Player\Abilities\Takedown.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Teleport" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Abilities\Teleport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThrowShuriken" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Abilities\ThrowShuriken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
