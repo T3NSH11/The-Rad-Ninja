@@ -32,8 +32,7 @@ public class PauseMenu : MonoBehaviour
             {
                 ResumeGame();
                 Cursor.lockState = CursorLockMode.Locked;
-                HUD.SetActive(true);
-                Cam.GetComponent<CameraController>().enabled = true;
+                
 
 
 
@@ -54,6 +53,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
+        HUD.SetActive(true);
+        Cam.GetComponent<CameraController>().enabled = true;
     }
 
     public void RestartLevel()
